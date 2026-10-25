@@ -1,0 +1,68 @@
+# Publish each day's Markets and AI content as plain JSON to the public data repo.
+# Runs after issues merge (workflow_run: GITHUB_TOKEN merges don't fire `push`),
+# after watchlist quick-adds, on direct pushes, on demand, and on a fallback schedule.
+# Auth: write deploy key for the data repo, stored here as DATA_REPO_DEPLOY_KEY.
+name: Data export
+
+on:
+  workflow_run:
+    workflows: ["Auto-merge daily issues", "Watchlist quick add"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ["_posts/**", "assets/issues/**", "scripts/export_feed.py"]
+  workflow_dispatch:
+  schedule:
+    - cron: "15 */3 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: data-export
+  cancel-in-progress: false
+
+env:
+  DATA_REPO: nick-nguyen-ai/market-data
+
+jobs:
+  export:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: src
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 -m pip install --quiet pyyaml
+      - name: Clone data repo (deploy key)
+        env:
+          KEY: ${{ secrets.DATA_REPO_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/data_key && chmod 600 ~/.ssh/data_key
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts 2>/dev/null
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/data_key -o IdentitiesOnly=yes"
+          git clone --depth 1 "git@github.com:${DATA_REPO}.git" data
+      - name: Export
+        run: python3 src/scripts/export_feed.py data
+      - name: Commit and push if changed
+        working-directory: data
+        run: |
+          set -euo pipefail
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/data_key -o IdentitiesOnly=yes"
+          git add -A
+          if git diff --cached --quiet; then echo "No data changes."; exit 0; fi
+          latest=$(python3 -c "import json;print(json.load(open('index.json'))['latest']['markets'] or '')")
+          git -c user.name="data-bot" -c user.email="data-bot@users.noreply.github.com" \
+            commit -q -m "Update data ${latest}"
+          for i in 1 2 3; do
+            git push -q origin HEAD:main && exit 0
+            git pull -q --rebase origin main || true
+          done
+          exit 1
