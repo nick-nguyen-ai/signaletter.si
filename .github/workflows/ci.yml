@@ -48,10 +48,26 @@ jobs:
         run: python3 scripts/tests/test_qa_markets.py
       - name: Auto-merge path gate tests
         run: python3 scripts/tests/test_check_pr_paths.py
+      - name: Changelog gate tests
+        run: python3 scripts/tests/test_check_changelog.py
       - name: Data export tests
         run: python3 scripts/tests/test_export_feed.py
       - name: QA every Markets v2 post in the repo
         run: python3 scripts/qa_markets.py _posts/*-markets.md
+
+  changelog:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: CHANGELOG.md updated for non-content changes
+        env:
+          BRANCH: ${{ github.head_ref }}
+          BASE: ${{ github.base_ref }}
+        run: python3 scripts/check_changelog.py "origin/$BASE" HEAD --branch "$BRANCH"
 
   jekyll:
     runs-on: ubuntu-latest
