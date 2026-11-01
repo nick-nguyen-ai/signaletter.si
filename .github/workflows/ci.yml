@@ -50,6 +50,10 @@ jobs:
         run: python3 scripts/tests/test_check_pr_paths.py
       - name: Changelog gate tests
         run: python3 scripts/tests/test_check_changelog.py
+      - name: Watchlist insight merge tests
+        run: python3 scripts/tests/test_build_watchlist.py
+      - name: Watchlist info-tier render tests
+        run: node --test scripts/tests/test_watchlist_tier.mjs
       - name: Data export tests
         run: python3 scripts/tests/test_export_feed.py
       - name: QA every Markets v2 post in the repo

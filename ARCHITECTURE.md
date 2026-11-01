@@ -22,7 +22,7 @@ Working files for each day live in `/workspace/newsletter/YYYY-MM-DD/` on the ag
 | AI report | `ai.yml`, `newsletter.md` → `_posts/<date>-ai.md` |
 | ASX morning (weekdays) / weekend macro (Sat-Sun) | `markets-content.yml`, `markets-draft.md`, snapshot via `fetch_markets.py` |
 | Quality review | `markets.md`, `review-log.md` (fact/source checks before publish) |
-| Publish | builds the post, runs `qa_markets.py --fix`, `build_watchlist_json.py`, opens a `cursor/issue-<date>` PR |
+| Publish | builds the post, runs `qa_markets.py --fix`, `build_watchlist_json.py` (then merges reader-pick insights), opens a `cursor/issue-<date>` PR |
 | Close wrap (~16:15) | `close-content.yml`, `close-snapshot.json`, `close-chat.md`, `close-review-log.md` → `cursor/issue-<date>-close` PR |
 
 ## 3. Scripts (`scripts/`, see `scripts/README.md`)
@@ -37,13 +37,14 @@ Working files for each day live in `/workspace/newsletter/YYYY-MM-DD/` on the ag
 
 ## 4. snapshot.json and watchlist.json
 - `snapshot.json` / `close-snapshot.json`: dashboard and `wl_<ticker>` quotes with provenance (provider, URL, session date, status). Tiles render only from it.
-- `watchlist.json` (`signaletter.watchlist/v1`): `editions.{morning,close}.items.<TICKER>` with price, note, sources, `reviewed`. Reviewed notes come from the post; other tickers get price + ASX announcement headlines. Details: `docs/my-watchlist.md`.
+- `watchlist.json` (`signaletter.watchlist/v1`): `editions.{morning,close}.items.<TICKER>` with price, note, sources, `reviewed`. Reviewed notes come from the post; other tickers get price + ASX announcement headlines, plus an optional sourced `insight` / `insight_sources` merged from the routine agent's `/workspace/newsletter/<date>/watchlist-insights.yml` (`build_watchlist_json.py --insights FILE --merge-only`; `--list-picks` lists picks needing one). Every item has `price_note` (price + ASX filings only) for the basic tier. Details: `docs/my-watchlist.md`.
 
 ## 5. Reader watchlist ("My shares")
 - Cloudflare Worker `signaletter-watchlist` (`worker/`, docs `worker/README.md`): magic-link email sign-in (`/auth/request`, `/auth/verify`), `GET /me`, `PUT /me/tickers`, `DELETE /me`, stub subscribe endpoints.
 - Picks stored in KV binding `WATCHLIST` at `user:<email>`, tickers mirrored in key metadata; auth state (single-use links, session versions) in the `AuthState` Durable Object.
 - `GET /admin/tickers` (bearer admin token) returns the union of codes, never emails; used by `build_watchlist_json.py`.
 - Browser side: `assets/js/my-watchlist.js` swaps the watchlist section for the reader's picks from the day's `watchlist.json`; enabled by `watchlist_api` in `_config.yml`.
+- Info tier: `watchlist_info_tier` in `_config.yml` (`basic` = price + filings, `full` = adds note, insight, sources; default `full`) is emitted as `<meta name="sl-watchlist-tier">`. A `tier` field on the KV record `user:<email>` is returned by `GET /me` and overrides it (hook for subscription levels).
 
 ## 6. GitHub dispatch for new picks
 When a reader saves a ticker missing from today's `watchlist.json`, the Worker calls the GitHub API to dispatch

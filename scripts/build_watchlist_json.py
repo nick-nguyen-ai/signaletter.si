@@ -14,6 +14,21 @@ post has (morning; close when the post has a close block). Facts only:
   window, or says there were none. If a source fails, the entry says the data
   is not available rather than guessing.
 
+Insight (reader picks): rows not in the post's reviewed watchlist block can carry an
+"insight": a short, neutral, sourced explanation of the move (company news, sector or
+index move, peers, macro), written by the routine agent into an insights YAML file and
+merged with --insights FILE. Each insight needs at least one https source; entries
+without one are dropped, never shown unsourced. File shape:
+  morning:
+    BHP: {insight: "...", sources: [{label: "...", url: "https://..."}]}
+  close:
+    BHP: {...}
+Use --list-picks to print the reader picks (beyond the defaults) that need an insight.
+
+Info tier: every item also carries "price_note" (price move plus ASX filings only), so the
+page can render the "basic" tier from the same file; "full" adds note/insight. The site
+default is watchlist_info_tier in _config.yml; a reader's KV record can override it.
+
 Ticker set = the default list (assets/data/watchlist-default-tickers.txt, or
 --tickers/--tickers-file when given) plus the union of every reader's picks from
 the Worker's GET /admin/tickers (codes only), authenticated with the token in
@@ -148,6 +163,61 @@ def note_from_announcements(t: str, anns: list[dict] | None, start: dt.datetime,
                                        "claim_type": "official_statement"}]}
 
 
+INSIGHT_MAX_CHARS = 600
+
+
+def load_insights(path: str | None) -> dict[str, dict[str, dict]]:
+    """Read the routine's insights file; keep only well-formed, sourced entries."""
+    if not path:
+        return {}
+    p = Path(path)
+    if not p.exists():
+        print(f"warning: insights file {p} not found; rows get price and ASX filings only", file=sys.stderr)
+        return {}
+    raw = yaml.safe_load(p.read_text()) or {}
+    out: dict[str, dict[str, dict]] = {}
+    for scope in ("morning", "close"):
+        for t, e in (raw.get(scope) or {}).items():
+            t = str(t).upper()
+            if not isinstance(e, dict):
+                continue
+            text = " ".join(str(e.get("insight") or "").split())
+            srcs = [{"label": str(s.get("label") or "Source").strip(), "url": str(s["url"]).strip(),
+                     **({"claim_type": s["claim_type"]} if s.get("claim_type") else {})}
+                    for s in (e.get("sources") or [])
+                    if isinstance(s, dict) and str(s.get("url") or "").startswith("https://")]
+            if not text or not srcs:
+                print(f"warning: insight {scope}:{t} dropped (needs text and an https source)", file=sys.stderr)
+                continue
+            if len(text) > INSIGHT_MAX_CHARS:
+                print(f"warning: insight {scope}:{t} dropped (over {INSIGHT_MAX_CHARS} chars)", file=sys.stderr)
+                continue
+            out.setdefault(scope, {})[t] = {"insight": text, "insight_sources": srcs}
+    return out
+
+
+def apply_insight(item: dict, ins: dict | None) -> dict:
+    """Merge a sourced insight into an unreviewed row (reviewed rows already carry their note)."""
+    if ins and not item.get("reviewed"):
+        item["insight"] = ins["insight"]
+        item["insight_sources"] = ins["insight_sources"]
+    return item
+
+
+def merge_into_existing(dest: Path, insights: dict) -> list[str]:
+    data = json.loads(dest.read_text())
+    done = []
+    for scope, ed in (data.get("editions") or {}).items():
+        for t, item in (ed.get("items") or {}).items():
+            ins = insights.get(scope, {}).get(t)
+            if ins and not item.get("reviewed"):
+                apply_insight(item, ins)
+                done.append(f"{scope}:{t}")
+    dest.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
+    print(f"insights merged into {dest}: {done or 'none'}")
+    return done
+
+
 def reader_tickers(api: str) -> list[str] | None:
     """Union of all readers' picked codes from the Worker, or None if unavailable."""
     import os
@@ -174,7 +244,15 @@ def main() -> None:
     ap.add_argument("--api", default=API)
     ap.add_argument("--add", default="", help="additive mode: comma list of tickers to add to the existing "
                     "file; existing entries are never changed or removed; new entries get quick: true")
+    ap.add_argument("--insights", help="YAML of sourced insights for reader picks (see module doc)")
+    ap.add_argument("--list-picks", action="store_true",
+                    help="print reader picks beyond the default list (they need insights) and exit")
+    ap.add_argument("--merge-only", action="store_true",
+                    help="with --insights: merge insights into the existing watchlist.json (no refetch) and exit")
     args = ap.parse_args()
+    if args.merge_only:
+        merge_into_existing(ROOT / "assets" / "issues" / args.date / "watchlist.json", load_insights(args.insights))
+        return
     tickers = [x.strip().upper() for x in args.tickers.split(",") if x.strip()]
     if args.tickers_file:
         tickers += [x.strip().upper() for x in Path(args.tickers_file).read_text().split() if x.strip()]
@@ -195,6 +273,11 @@ def main() -> None:
     if bad:
         sys.exit(f"not in allowed list: {bad}")
     tickers = sorted(set(tickers))
+    if args.list_picks:
+        defaults = set(DEFAULT_TICKERS.read_text().split())
+        print(" ".join(t for t in tickers if t not in defaults))
+        return
+    insights = load_insights(args.insights)
 
     post = load_post(args.date)
     editions = {"morning": post}
@@ -241,15 +324,18 @@ def main() -> None:
         items = {}
         for t in tickers:
             px = price_block(t, closes.get(t), session, quotes.get(f"wl_{t.lower()}"))
+            auto = note_from_announcements(t, anns.get(t), start, cutoff, px, session_word)
             if t in reviewed:
                 r = reviewed[t]
                 body = {"note": r["note"], "sources": r.get("sources") or [], "reviewed": True}
                 if r.get("next_catalyst"):
                     body["next_catalyst"] = r["next_catalyst"]
             else:
-                body = note_from_announcements(t, anns.get(t), start, cutoff, px, session_word)
+                body = dict(auto)
                 body["reviewed"] = False
-            items[t] = {"ticker": t, "name": allowed[t], "price": px, **body}
+            body["price_note"] = auto["note"]
+            items[t] = apply_insight({"ticker": t, "name": allowed[t], "price": px, **body},
+                                     insights.get(scope, {}).get(t))
         out["editions"][scope] = {
             "cutoff_local": str(ed["cutoff_local"]), "session_date": session,
             "announcement_window_local": [start.isoformat(), cutoff.isoformat()], "items": items,

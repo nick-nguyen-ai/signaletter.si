@@ -17,6 +17,11 @@ permalink: /:year/:month/:day/:slug/
 # "My shares" (per-reader watchlist). Leave unset until the Cloudflare Worker is deployed:
 # while unset, no sign-in link, script or styles are added and pages render as before.
 watchlist_api: https://signaletter-watchlist.signaletter.workers.dev
+# Info tier for reader-pick rows in "My shares": basic = price move and ASX filings only;
+# full = adds the sourced news/sector insight. A reader's own tier (the "tier" field on their
+# Worker KV record user:<email>, returned by GET /me) overrides this, so it can later follow
+# their subscription level.
+watchlist_info_tier: full
 
 # GitHub Pages–supported plugins only
 plugins:

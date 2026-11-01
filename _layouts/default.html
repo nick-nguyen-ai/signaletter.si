@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/markets.css' | relative_url }}?v=8">
   {%- if site.watchlist_api %}
   <meta name="sl-watchlist-api" content="{{ site.watchlist_api }}">
+  <meta name="sl-watchlist-tier" content="{{ site.watchlist_info_tier | default: 'full' }}">
   <link rel="stylesheet" href="{{ '/assets/css/watchlist.css' | relative_url }}?v=2">
   {%- endif %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">

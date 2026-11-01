@@ -1,7 +1,7 @@
 // SignaLetter API: passwordless sign-in, per-reader "My shares" watchlist, email signup stub.
 // Storage:
 //   Workers KV (binding WATCHLIST), eventually consistent, for data:
-//     user:<email>        -> {"tickers":[...],"created":iso,"updated":iso}
+//     user:<email>        -> {"tickers":[...],"created":iso,"updated":iso,"tier"?:"basic"|"full"}
 //     rl:<email>:<hour>   -> count (TTL 1h; sign-in email rate limit, best effort)
 //     sub:<email>         -> {"lists":[...],"status":"pending"|"confirmed","updated":iso}
 //     used:<nonce>        -> legacy (pre-Durable-Object) used-link markers; read only, expire by TTL
@@ -249,7 +249,9 @@ async function getMe(env, req) {
   const s = await session(env, req);
   if (!s) return json(env, req, { ok: false, error: "signed_out" }, 401);
   const u = JSON.parse((await env.WATCHLIST.get(`user:${s.e}`)) || '{"tickers":[]}');
-  return json(env, req, { ok: true, email: s.e, tickers: u.tickers || [], max: parseInt(env.MAX_TICKERS || "10", 10) });
+  // Info tier override (later set from the reader's subscription): "basic" | "full", else null = site default.
+  const tier = ["basic", "full"].includes(u.tier) ? u.tier : null;
+  return json(env, req, { ok: true, email: s.e, tickers: u.tickers || [], max: parseInt(env.MAX_TICKERS || "10", 10), tier });
 }
 
 async function putTickers(env, req) {

@@ -58,3 +58,17 @@ It commits to `main` with rebase-retry (concurrency group `watchlist-add`) and r
 
 Needs Worker secret `GITHUB_DISPATCH_TOKEN`: a fine-grained PAT for this repo only, permission
 Actions: Read and write. Without it, saves work as before and nothing is dispatched (`pending: []`).
+
+## Reader-pick insights and info tier
+
+- Rows for reader picks (not in the post's reviewed watchlist block) can carry an `insight`: a short,
+  neutral, sourced explanation of the move (company news, sector or index move, peers, macro), with
+  `insight_sources` (https only). The routine agent writes them to
+  `/workspace/newsletter/YYYY-MM-DD/watchlist-insights.yml` and merges them with
+  `python3 scripts/build_watchlist_json.py --date YYYY-MM-DD --insights <file> --merge-only`.
+  `--list-picks` prints the picks that need one. Unsourced or over-long (600 chars) entries are dropped.
+- Every row also has `price_note` (price move plus ASX filings only).
+- Tier: `watchlist_info_tier` in `_config.yml` (`basic` | `full`, default `full`) is the site default.
+  A reader's KV record `user:<email>` may have `"tier": "basic" | "full"`; `GET /me` returns it and it
+  overrides the site default. `basic` shows the price line and `price_note`; `full` adds the note,
+  insight, next catalyst and sources.
