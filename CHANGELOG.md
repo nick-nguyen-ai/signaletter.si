@@ -10,6 +10,16 @@ Entry shape: what changed and why, key files, PR link.
 ## [Unreleased]
 
 ### Added
+- Reader-pick insights and an info-tier flag for "My shares" (PR #57). Rows for reader picks can carry a
+  short, neutral, sourced `insight` (company news, sector/index, peers, macro) merged from the routine's
+  `watchlist-insights.yml` via `build_watchlist_json.py --insights FILE [--merge-only]`; unsourced or
+  non-https entries are dropped. Every row gains `price_note` (price + ASX filings only).
+  `watchlist_info_tier` in `_config.yml` (`basic` | `full`, default `full`) sets the page tier; a `tier`
+  field on the reader's KV record `user:<email>` (returned by `GET /me`) overrides it, ready to map to a
+  subscription level. Why: reader-pick rows only said "No new ASX announcement". Files:
+  `scripts/build_watchlist_json.py`, `assets/js/my-watchlist.js`, `_layouts/default.html`,
+  `worker/src/index.js`, tests `scripts/tests/test_build_watchlist.py`,
+  `scripts/tests/test_watchlist_tier.mjs`, `worker/test/worker.spec.mjs`.
 - `CHANGELOG.md` (backfilled from PR history), `ARCHITECTURE.md`, `AGENTS.md`, a PR template, and a CI
   `changelog` job (`scripts/check_changelog.py`) that fails a PR touching non-content files without a
   `CHANGELOG.md` change. Why: keep a reviewable record of every feature change for Nick and other coding

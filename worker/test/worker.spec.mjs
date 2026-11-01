@@ -1,5 +1,5 @@
 // Regression tests for the SignaLetter Worker (run: npm test). Executed inside workerd.
-import { exports } from "cloudflare:workers";
+import { exports, env } from "cloudflare:workers";
 import { describe, it, expect } from "vitest";
 
 const ORIGIN = "http://localhost:4000";
@@ -125,5 +125,22 @@ describe("tickers and admin", () => {
     expect(a.status).toBe(200);
     expect(a.body.tickers).toEqual(expect.arrayContaining(["BHP", "CBA"]));
     expect(JSON.stringify(a.body)).not.toContain("@");
+  });
+});
+
+describe("info tier", () => {
+  it("GET /me returns null tier by default and the KV record's tier when set", async () => {
+    const email = freshEmail();
+    const s = await signIn(email);
+    expect((await call("GET", "/me", null, s)).body.tier).toBeNull();
+    const key = `user:${email}`;
+    const u = JSON.parse(await env.WATCHLIST.get(key));
+    await env.WATCHLIST.put(key, JSON.stringify({ ...u, tier: "basic" }));
+    expect((await call("GET", "/me", null, s)).body.tier).toBe("basic");
+    // saving picks keeps the tier
+    expect((await call("PUT", "/me/tickers", { tickers: ["BHP"] }, s)).status).toBe(200);
+    expect((await call("GET", "/me", null, s)).body.tier).toBe("basic");
+    await env.WATCHLIST.put(key, JSON.stringify({ ...u, tier: "platinum" }));
+    expect((await call("GET", "/me", null, s)).body.tier).toBeNull();
   });
 });

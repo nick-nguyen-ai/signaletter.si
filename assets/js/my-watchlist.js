@@ -11,6 +11,16 @@
   var API = meta ? String(meta.content || "").replace(/\/+$/, "") : "";
   if (!API) return;
   var KEY = "sl.wl.session";
+  var tmeta = document.querySelector('meta[name="sl-watchlist-tier"]');
+  var TIERS = ["basic", "full"];
+  // Reader's tier (from GET /me, later their subscription) wins; else the site default; else full.
+  function resolveTier(readerTier, siteTier) {
+    if (TIERS.indexOf(readerTier) >= 0) return readerTier;
+    if (TIERS.indexOf(siteTier) >= 0) return siteTier;
+    return "full";
+  }
+  var SITE_TIER = tmeta ? String(tmeta.content || "").trim() : "";
+  var tier = resolveTier(null, SITE_TIER);
   var TICKERS_URL = "/assets/data/asx-tickers.json";
 
   function getSession() {
@@ -81,27 +91,36 @@
       m.appendChild(el("span", "mk-flag", "delayed, unofficial"));
       li.appendChild(m);
     }
-    var note = el("p", "mk-watch__note", item ? item.note : updating ? "Updating your shares, check back in a minute." : "Not in our data for this edition.");
-    if (item && item.reviewed === false) note.appendChild(el("span", "mk-wl-tag", "auto: price + ASX feed"));
+    var basic = tier === "basic";
+    var text = item ? (basic && item.price_note ? item.price_note : item.note) : updating ? "Updating your shares, check back in a minute." : "Not in our data for this edition.";
+    var note = el("p", "mk-watch__note", text);
+    if (item && (basic || item.reviewed === false)) note.appendChild(el("span", "mk-wl-tag", "auto: price + ASX feed"));
     li.appendChild(note);
-    if (item && item.next_catalyst) {
+    if (item && !basic && item.insight) {
+      var ins = el("p", "mk-watch__note mk-watch__insight", item.insight);
+      li.appendChild(ins);
+      sourcesLine(li, item.insight_sources);
+    }
+    if (item && !basic && item.next_catalyst) {
       var nx = el("p", "mk-watch__next");
       nx.appendChild(el("b", null, "Next:"));
       nx.appendChild(document.createTextNode(" " + item.next_catalyst));
       li.appendChild(nx);
     }
-    if (item && item.sources && item.sources.length) {
-      var src = el("p", "mk-sources-inline");
-      item.sources.forEach(function (sObj, i) {
-        if (!/^https:\/\//.test(sObj.url || "")) return;
-        if (i) src.appendChild(document.createTextNode(" · "));
-        var a = el("a", null, sObj.label);
-        a.href = sObj.url; a.rel = "noopener";
-        src.appendChild(a);
-      });
-      li.appendChild(src);
-    }
+    if (item && !(basic && item.reviewed)) sourcesLine(li, item.sources);
     return li;
+  }
+  function sourcesLine(li, list) {
+    if (!list || !list.length) return;
+    var src = el("p", "mk-sources-inline"), n = 0;
+    list.forEach(function (sObj) {
+      if (!/^https:\/\//.test(sObj.url || "")) return;
+      if (n++) src.appendChild(document.createTextNode(" · "));
+      var a = el("a", null, sObj.label);
+      a.href = sObj.url; a.rel = "noopener";
+      src.appendChild(a);
+    });
+    if (n) li.appendChild(src);
   }
 
   function setBar(section, parts) {
@@ -157,6 +176,7 @@
       sections.forEach(function (sec) { sec.removeAttribute("data-wl-loading"); });
       if (me._status === 401) { clearSession(); return; }
       if (!me.ok) return;
+      tier = resolveTier(me.tier, SITE_TIER);
       var who = me.email;
       if (!me.tickers.length) {
         sections.forEach(function (sec) {
@@ -318,6 +338,9 @@
     var s = getSession();
     if (s) startPicker(s); else show("signin");
   }
+
+  // Test hook (scripts/tests/test_watchlist_tier.mjs): pure helpers only, no session access.
+  window.SLWatchlist = { resolveTier: resolveTier, renderRow: renderRow, setTier: function (t) { tier = resolveTier(t, SITE_TIER); } };
 
   function boot() {
     initHeader();
