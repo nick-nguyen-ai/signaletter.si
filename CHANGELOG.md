@@ -18,7 +18,7 @@ Entry shape: what changed and why, key files, PR link.
   post's first calendar row already had a `consensus_source`, so adding a consensus raised no error and
   the test failed on that day's PRs. The test now removes `consensus_source` first and asserts the
   `[consensus]` error; a new test checks a sourced consensus is kept. Files: `scripts/tests/test_qa_markets.py`.
-  PR: see #PRNUM.
+  PR #65.
 
 ### Changed (2026-11-05, routines outside the repo)
 - The daily publish and close-wrap routines push branches and open PRs with `gh` directly instead of
