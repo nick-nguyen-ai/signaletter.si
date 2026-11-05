@@ -12,6 +12,7 @@ permissions:
   contents: write
   pull-requests: write
   pages: write
+  checks: read
 
 concurrency:
   group: auto-merge-issues-${{ github.event.pull_request.number }}
@@ -27,6 +28,7 @@ jobs:
       startsWith(github.head_ref, 'cursor/issue-') &&
       github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - name: Checkout PR head
@@ -67,6 +69,37 @@ jobs:
           set -euo pipefail
           bundle install
           JEKYLL_ENV=production bundle exec jekyll build
+
+      - name: Wait for every CI job (python, jekyll, worker, changelog) to pass
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          # Merge only when all required CI check runs on the PR head succeeded.
+          # Any failure (or a 40-minute timeout) leaves the PR open with an error annotation.
+          required="python jekyll worker changelog"
+          for i in $(seq 1 80); do
+            runs=$(gh api "repos/${{ github.repository }}/commits/$SHA/check-runs?per_page=100" \
+              --jq '.check_runs[] | "\(.name)=\(.status)/\(.conclusion)"')
+            pending=0; failed=""
+            for job in $required; do
+              line=$(echo "$runs" | grep -E "^$job=" | tail -1 || true)
+              case "$line" in
+                "$job=completed/success") ;;
+                "$job=completed/"*) failed="$failed $job(${line#*/})" ;;
+                *) pending=1 ;;
+              esac
+            done
+            if [ -n "$failed" ]; then
+              echo "::error::Not merging: CI job(s) failed:$failed. PR left open; fix and push to retry."
+              exit 1
+            fi
+            if [ "$pending" -eq 0 ]; then echo "All CI jobs passed."; exit 0; fi
+            echo "Waiting for CI ($i/80)…"; sleep 30
+          done
+          echo "::error::Not merging: CI did not finish within 40 minutes. PR left open."
+          exit 1
 
       - name: Squash-merge into main
         id: merge

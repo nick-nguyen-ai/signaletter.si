@@ -9,6 +9,23 @@ Entry shape: what changed and why, key files, PR link.
 
 ## [Unreleased]
 
+### Fixed (2026-11-05)
+- Auto-merge now waits for CI. `auto-merge-issues.yml` merged daily `cursor/issue-*` PRs even when CI
+  jobs failed (#61, #62 merged with `python` red). It now polls the PR head's check runs and squash-merges
+  only once `python`, `jekyll`, `worker` and `changelog` all succeed; a failure or 40-minute timeout
+  leaves the PR open with an error naming the failed job. Files: `.github/workflows/auto-merge-issues.yml`.
+- Flaky `test_consensus_needs_named_source`. The test builds on the newest live Markets post; the 4 Nov
+  post's first calendar row already had a `consensus_source`, so adding a consensus raised no error and
+  the test failed on that day's PRs. The test now removes `consensus_source` first and asserts the
+  `[consensus]` error; a new test checks a sourced consensus is kept. Files: `scripts/tests/test_qa_markets.py`.
+  PR #65.
+
+### Changed (2026-11-05, routines outside the repo)
+- The daily publish and close-wrap routines push branches and open PRs with `gh` directly instead of
+  using cloud agents (they kept failing with "must be a collaborator"). The morning issue reuses the
+  previous close's reader-pick insights unless there is new news; the quality review re-checks flagged
+  items plus a sample. Why: cut usage as the reader-pick list grows. Documented in `ARCHITECTURE.md`.
+
 ### Added
 - Reader-pick insights and an info-tier flag for "My shares" (PR #57). Rows for reader picks can carry a
   short, neutral, sourced `insight` (company news, sector/index, peers, macro) merged from the routine's
