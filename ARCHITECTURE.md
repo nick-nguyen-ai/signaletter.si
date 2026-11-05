@@ -22,8 +22,15 @@ Working files for each day live in `/workspace/newsletter/YYYY-MM-DD/` on the ag
 | AI report | `ai.yml`, `newsletter.md` → `_posts/<date>-ai.md` |
 | ASX morning (weekdays) / weekend macro (Sat-Sun) | `markets-content.yml`, `markets-draft.md`, snapshot via `fetch_markets.py` |
 | Quality review | `markets.md`, `review-log.md` (fact/source checks before publish) |
-| Publish | builds the post, runs `qa_markets.py --fix`, `build_watchlist_json.py` (then merges reader-pick insights), opens a `cursor/issue-<date>` PR |
-| Close wrap (~16:15) | `close-content.yml`, `close-snapshot.json`, `close-chat.md`, `close-review-log.md` → `cursor/issue-<date>-close` PR |
+| Publish | builds the post, runs `qa_markets.py --fix`, `build_watchlist_json.py` (then merges reader-pick insights), pushes the branch and opens a `cursor/issue-<date>` PR directly with `gh` (no cloud agent, since 5 Nov 2026) |
+| Close wrap (~16:15) | `close-content.yml`, `close-snapshot.json`, `close-chat.md`, `close-review-log.md` → `cursor/issue-<date>-close` PR, pushed and opened directly with `gh` (no cloud agent, since 5 Nov 2026) |
+
+Reader-pick insights (since 5 Nov 2026): each extra pick is researched once a day, in the close wrap
+(`close:` key of `watchlist-insights.yml`). The morning issue reuses the previous close's insight and
+only re-researches a pick when there is a new ASX announcement or new company news. The quality review
+re-opens sources only for items the drafts flag as uncertain plus a random sample. These are routine
+prompt changes outside this repo. A nightly usage log (`/workspace/newsletter/usage-log.csv`, on the box,
+not in any repo) records each routine's share of usage and the number of reader picks.
 
 ## 3. Scripts (`scripts/`, see `scripts/README.md`)
 - `fetch_markets.py`: deterministic market snapshot (official sources first, Yahoo labelled delayed/unofficial; never guesses). `--close` for the close.
@@ -52,7 +59,7 @@ When a reader saves a ticker missing from today's `watchlist.json`, the Worker c
 tickers to the file (never changes existing entries), pushes to `main` with rebase-retry and requests a Pages build.
 
 ## 7. Workflows (`.github/workflows/`)
-- `auto-merge-issues.yml`: for same-repo, non-draft `cursor/issue-*` PRs: path gate (checker taken from base branch), Markets QA report-only, Jekyll build, squash-merge, then explicit Pages build request.
+- `auto-merge-issues.yml`: for same-repo, non-draft `cursor/issue-*` PRs: path gate (checker taken from base branch), Markets QA report-only, Jekyll build, then waits for the CI check runs `python`, `jekyll`, `worker` and `changelog` on the PR head to all succeed (any failure or a 40-min timeout fails the job with the reason and leaves the PR open), then squash-merge, then explicit Pages build request.
 - `ci.yml`: on PRs/pushes: Worker vitest + wrangler dry run, Python tests + QA of all Markets posts, Jekyll strict build, changelog gate.
 - `watchlist-add.yml`: see §6.
 - `data-export.yml`: see §9.

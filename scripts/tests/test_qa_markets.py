@@ -97,9 +97,24 @@ def test_unsourced_claim_dropped():
 
 def test_consensus_needs_named_source():
     fm = copy.deepcopy(BASE)
-    fm["calendar"][0]["consensus"] = "4.6%"
+    # Don't depend on the live post: its first calendar row may already carry a
+    # consensus_source (4 Nov did), which made this test fail intermittently.
+    row = fm["calendar"][0]
+    row.pop("consensus_source", None)
+    row["consensus"] = "4.6%"
     rep = run(fm)
+    assert any(e.startswith("[consensus]") for e in rep.errors), rep.errors
     assert "consensus" not in fm["calendar"][0], rep.errors
+
+
+def test_consensus_with_named_source_kept():
+    fm = copy.deepcopy(BASE)
+    row = fm["calendar"][0]
+    row["consensus"] = "4.6%"
+    row["consensus_source"] = "Reuters poll"
+    rep = run(fm)
+    assert not any(e.startswith("[consensus]") for e in rep.errors), rep.errors
+    assert row.get("consensus") == "4.6%"
 
 
 def test_loaded_language_flagged():
