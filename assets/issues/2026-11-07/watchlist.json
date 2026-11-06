@@ -1,0 +1,1141 @@
+{
+ "schema": "signaletter.watchlist/v1",
+ "date": "2026-11-07",
+ "generated_by": "scripts/build_watchlist_json.py",
+ "retrieved_at_utc": "2026-11-06T21:43Z",
+ "disclaimer": "Information only, not financial advice. Prices delayed and unofficial.",
+ "editions": {
+  "morning": {
+   "cutoff_local": "2026-11-07T07:30:00+11:00",
+   "session_date": "2026-11-06",
+   "announcement_window_local": [
+    "2026-11-06T00:00:00+11:00",
+    "2026-11-07T07:30:00+11:00"
+   ],
+   "items": {
+    "A2M": {
+     "ticker": "A2M",
+     "name": "THE A2 Milk Company",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 7.13,
+      "display_value": "7.13",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 7.26,
+      "change_pct": -1.79,
+      "display_change": "−1.8%",
+      "provider": "Yahoo Finance (A2M.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/A2M.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 1.8% to A$7.13 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (A2M)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.a2m",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 1.8% to A$7.13 on Friday. No new ASX announcement.",
+     "insight": "a2 Milk fell 1.7% on Friday even as consumer staples rose about 1.1% in a defensive shift, while the ASX 200 fell 0.5% after Wall Street's AI-led sell-off. It made no new ASX announcement.",
+     "insight_sources": [
+      {
+       "label": "Market Index, ASX live, 6 Nov",
+       "url": "https://www.marketindex.com.au/news/asx-200-live-today-friday-6th-november"
+      },
+      {
+       "label": "ASX announcements, A2M",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/A2M/announcements"
+      }
+     ]
+    },
+    "AIA": {
+     "ticker": "AIA",
+     "name": "Auckland International Airport",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 7.1,
+      "display_value": "7.10",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 7.02,
+      "change_pct": 1.14,
+      "display_change": "+1.1%",
+      "provider": "Yahoo Finance (AIA.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/AIA.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 1.1% to A$7.10 on Friday. ASX announcements: “AIA - Auckland Airport bond offers bookbuild update no. 2”, 6 Nov 7:30am AEDT; “AIA - Announces books closed for retail bond offer”, 6 Nov 10:13am AEDT; “AIA - announces interest rate for retail bond offer”, 6 Nov 10:42am AEDT and 1 more.",
+     "sources": [
+      {
+       "label": "ASX announcements (AIA)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.aia",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 1.1% to A$7.10 on Friday. ASX announcements: “AIA - Auckland Airport bond offers bookbuild update no. 2”, 6 Nov 7:30am AEDT; “AIA - Announces books closed for retail bond offer”, 6 Nov 10:13am AEDT; “AIA - announces interest rate for retail bond offer”, 6 Nov 10:42am AEDT and 1 more.",
+     "insight": "Auckland Airport rose 1.0% on Friday after announcing the books had closed and the interest rate and terms sheet were set for its retail bond offer. The ASX 200 fell 0.5% as miners and tech followed Wall Street lower.",
+     "insight_sources": [
+      {
+       "label": "ASX announcements, AIA",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/AIA/announcements"
+      },
+      {
+       "label": "Market Index, ASX live, 6 Nov",
+       "url": "https://www.marketindex.com.au/news/asx-200-live-today-friday-6th-november"
+      }
+     ]
+    },
+    "ALL": {
+     "ticker": "ALL",
+     "name": "Aristocrat Leisure",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 65.86,
+      "display_value": "65.86",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 66.05,
+      "change_pct": -0.29,
+      "display_change": "−0.3%",
+      "provider": "Yahoo Finance (ALL.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/ALL.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 0.3% to A$65.86 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (ALL)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.all",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 0.3% to A$65.86 on Friday. No new ASX announcement."
+    },
+    "AMC": {
+     "ticker": "AMC",
+     "name": "Amcor PLC",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 65.01,
+      "display_value": "65.01",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 62.11,
+      "change_pct": 4.67,
+      "display_change": "+4.7%",
+      "provider": "Yahoo Finance (AMC.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/AMC.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 4.7% to A$65.01 on Friday. ASX announcement: “Form 10Q - 1Q Transition Period”, 6 Nov 9:07am AEDT.",
+     "sources": [
+      {
+       "label": "ASX announcements (AMC)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.amc",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 4.7% to A$65.01 on Friday. ASX announcement: “Form 10Q - 1Q Transition Period”, 6 Nov 9:07am AEDT.",
+     "insight": "Amcor rose 5.1% on Friday, among the ASX 200's top gainers, recovering part of Thursday's 7.2% fall after its September-quarter result. Market Index noted a broad shift into defensive stocks as the index fell 0.5%.",
+     "insight_sources": [
+      {
+       "label": "Market Index, ASX live, 6 Nov",
+       "url": "https://www.marketindex.com.au/news/asx-200-live-today-friday-6th-november"
+      },
+      {
+       "label": "ABC, markets live, 6 Nov",
+       "url": "https://www.abc.net.au/news/2026-11-06/asx-markets-business-live-news/107353758"
+      }
+     ]
+    },
+    "ANZ": {
+     "ticker": "ANZ",
+     "name": "ANZ Group Holdings",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 40.34,
+      "display_value": "40.34",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 40.1,
+      "change_pct": 0.6,
+      "display_change": "+0.6%",
+      "provider": "Yahoo Finance (ANZ.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/ANZ.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 0.6% to A$40.34 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (ANZ)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.anz",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 0.6% to A$40.34 on Friday. No new ASX announcement."
+    },
+    "BHP": {
+     "ticker": "BHP",
+     "name": "BHP Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 57.62,
+      "display_value": "57.62",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 59.0,
+      "change_pct": -2.34,
+      "display_change": "−2.3%",
+      "provider": "Yahoo Finance (BHP.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/BHP.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 2.3% to A$57.62 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (BHP)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.bhp",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 2.3% to A$57.62 on Friday. No new ASX announcement."
+    },
+    "BXB": {
+     "ticker": "BXB",
+     "name": "Brambles",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 22.2,
+      "display_value": "22.20",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 21.98,
+      "change_pct": 1.0,
+      "display_change": "+1.0%",
+      "provider": "Yahoo Finance (BXB.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/BXB.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 1.0% to A$22.20 on Friday. ASX announcements: “Update - Notification of buy-back - BXB”, 6 Nov 8:23am AEDT; “Notification of cessation of securities - BXB”, 6 Nov 9:44am AEDT; “Application for quotation of securities - BXB”, 6 Nov 12:31pm AEDT and 1 more.",
+     "sources": [
+      {
+       "label": "ASX announcements (BXB)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.bxb",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 1.0% to A$22.20 on Friday. ASX announcements: “Update - Notification of buy-back - BXB”, 6 Nov 8:23am AEDT; “Notification of cessation of securities - BXB”, 6 Nov 9:44am AEDT; “Application for quotation of securities - BXB”, 6 Nov 12:31pm AEDT and 1 more."
+    },
+    "CBA": {
+     "ticker": "CBA",
+     "name": "Commonwealth Bank of Australia",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 167.51,
+      "display_value": "167.51",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 166.29,
+      "change_pct": 0.73,
+      "display_change": "+0.7%",
+      "provider": "Yahoo Finance (CBA.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/CBA.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 0.7% to A$167.51 on Friday. ASX announcement: “Record date and interest payment date schedule”, 6 Nov 9:51am AEDT.",
+     "sources": [
+      {
+       "label": "ASX announcements (CBA)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.cba",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 0.7% to A$167.51 on Friday. ASX announcement: “Record date and interest payment date schedule”, 6 Nov 9:51am AEDT."
+    },
+    "COL": {
+     "ticker": "COL",
+     "name": "Coles Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 22.6,
+      "display_value": "22.60",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 22.2,
+      "change_pct": 1.8,
+      "display_change": "+1.8%",
+      "provider": "Yahoo Finance (COL.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/COL.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 1.8% to A$22.60 on Friday. ASX announcements: “Chair's Address to Shareholders”, 6 Nov 9:06am AEDT; “MD & CEO Address to Shareholders”, 6 Nov 9:10am AEDT; “Results of Meeting”, 6 Nov 12:22pm AEDT.",
+     "sources": [
+      {
+       "label": "ASX announcements (COL)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.col",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 1.8% to A$22.60 on Friday. ASX announcements: “Chair's Address to Shareholders”, 6 Nov 9:06am AEDT; “MD & CEO Address to Shareholders”, 6 Nov 9:10am AEDT; “Results of Meeting”, 6 Nov 12:22pm AEDT."
+    },
+    "CSL": {
+     "ticker": "CSL",
+     "name": "CSL",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 202.039993,
+      "display_value": "202.04",
+      "change_pct": -0.18,
+      "display_change": "−0.2%",
+      "provider": "Yahoo Finance (CSL.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/CSL.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "post snapshot"
+     },
+     "note": "Closed at A$202.04 (−0.2% Friday, +0.7% week). Filings this week were buy-back updates and a 6 November cessation-of-securities notice; none marked price-sensitive. No new verified company news explaining the week's move; it traded with health care, which UBS flagged as relatively detached from the AI cycle.",
+     "sources": [
+      {
+       "label": "Market Index",
+       "url": "https://www.marketindex.com.au/news/asx-200-live-today-friday-6th-november",
+       "claim_type": "reporting"
+      },
+      {
+       "label": "ASX announcements (CSL)",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/CSL/announcements",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": true,
+     "price_note": "Fell 0.2% to A$202.04 on Friday. ASX announcements: “Update - Notification of buy-back - CSL”, 6 Nov 8:23am AEDT; “Notification of cessation of securities - CSL”, 6 Nov 4:39pm AEDT."
+    },
+    "EVN": {
+     "ticker": "EVN",
+     "name": "Evolution Mining",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 12.91,
+      "display_value": "12.91",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 13.26,
+      "change_pct": -2.64,
+      "display_change": "−2.6%",
+      "provider": "Yahoo Finance (EVN.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/EVN.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 2.6% to A$12.91 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (EVN)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.evn",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 2.6% to A$12.91 on Friday. No new ASX announcement."
+    },
+    "FLT": {
+     "ticker": "FLT",
+     "name": "Flight Centre Travel Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 12.35,
+      "display_value": "12.35",
+      "change_pct": -2.14,
+      "display_change": "−2.1%",
+      "provider": "Yahoo Finance (FLT.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/FLT.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "post snapshot"
+     },
+     "note": "Closed at A$12.35 (−2.1% Friday, +8.8% week). Citigroup entities became a substantial holder with 5.14% voting power (notice lodged 5 November, interest dated 3 November). Other filings were ceasing/becoming substantial holder notices. No new operational company news; the share moved with travel and oil headlines through the week.",
+     "sources": [
+      {
+       "label": "Market Index (FLT announcement)",
+       "url": "https://www.marketindex.com.au/asx/flt/announcements/becoming-a-substantial-holder-2A1708667",
+       "claim_type": "official_statement"
+      },
+      {
+       "label": "ASX announcements (FLT)",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/FLT/announcements",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": true,
+     "next_catalyst": "Further oil/Hormuz headlines that affect fuel and travel demand.",
+     "price_note": "Fell 2.1% to A$12.35 on Friday. No new ASX announcement."
+    },
+    "FMG": {
+     "ticker": "FMG",
+     "name": "Fortescue",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 15.18,
+      "display_value": "15.18",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 15.49,
+      "change_pct": -2.0,
+      "display_change": "−2.0%",
+      "provider": "Yahoo Finance (FMG.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/FMG.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 2.0% to A$15.18 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (FMG)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.fmg",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 2.0% to A$15.18 on Friday. No new ASX announcement."
+    },
+    "GMG": {
+     "ticker": "GMG",
+     "name": "Goodman Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 27.84,
+      "display_value": "27.84",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 28.76,
+      "change_pct": -3.2,
+      "display_change": "−3.2%",
+      "provider": "Yahoo Finance (GMG.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/GMG.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 3.2% to A$27.84 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (GMG)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.gmg",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 3.2% to A$27.84 on Friday. No new ASX announcement."
+    },
+    "IEL": {
+     "ticker": "IEL",
+     "name": "IDP Education",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 2.2,
+      "display_value": "2.20",
+      "change_pct": -3.08,
+      "display_change": "−3.1%",
+      "provider": "Yahoo Finance (IEL.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/IEL.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "post snapshot"
+     },
+     "note": "Closed at A$2.20 (−3.1% Friday, −0.5% week). Filings were buy-back updates only; none marked price-sensitive. No new verified news explaining the week's moves.",
+     "sources": [
+      {
+       "label": "ASX announcements (IEL)",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/IEL/announcements",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": true,
+     "price_note": "Fell 3.1% to A$2.20 on Friday. ASX announcement: “Update - Notification of buy-back - IEL”, 6 Nov 8:25am AEDT."
+    },
+    "IPH": {
+     "ticker": "IPH",
+     "name": "IPH",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 4.0,
+      "display_value": "4.00",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 4.09,
+      "change_pct": -2.2,
+      "display_change": "−2.2%",
+      "provider": "Yahoo Finance (IPH.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/IPH.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 2.2% to A$4.00 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (IPH)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.iph",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 2.2% to A$4.00 on Friday. No new ASX announcement.",
+     "insight": "IPH fell 2.4% on Friday as the ASX 200 fell 0.5% after Wall Street's AI-led sell-off. It made no new ASX announcement; its latest filing was its AGM notice on 16 October.",
+     "insight_sources": [
+      {
+       "label": "Market Index, ASX live, 6 Nov",
+       "url": "https://www.marketindex.com.au/news/asx-200-live-today-friday-6th-november"
+      },
+      {
+       "label": "ASX announcements, IPH",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/IPH/announcements"
+      }
+     ]
+    },
+    "MQG": {
+     "ticker": "MQG",
+     "name": "Macquarie Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 248.86,
+      "display_value": "248.86",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 258.4,
+      "change_pct": -3.69,
+      "display_change": "−3.7%",
+      "provider": "Yahoo Finance (MQG.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/MQG.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 3.7% to A$248.86 on Friday. ASX announcements include: “Macquarie Group 1H27 Shareholder Email”, 6 Nov 8:28am AEDT; “Dividend/Distribution - MQGPD”, 6 Nov 9:05am AEDT; “Dividend/Distribution - MQGPE”, 6 Nov 9:06am AEDT and 2 more.",
+     "sources": [
+      {
+       "label": "ASX announcements (MQG)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.mqg",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 3.7% to A$248.86 on Friday. ASX announcements include: “Macquarie Group 1H27 Shareholder Email”, 6 Nov 8:28am AEDT; “Dividend/Distribution - MQGPD”, 6 Nov 9:05am AEDT; “Dividend/Distribution - MQGPE”, 6 Nov 9:06am AEDT and 2 more."
+    },
+    "NAB": {
+     "ticker": "NAB",
+     "name": "National Australia Bank",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 40.0,
+      "display_value": "40.00",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 38.96,
+      "change_pct": 2.67,
+      "display_change": "+2.7%",
+      "provider": "Yahoo Finance (NAB.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/NAB.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 2.7% to A$40.00 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (NAB)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.nab",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 2.7% to A$40.00 on Friday. No new ASX announcement."
+    },
+    "NST": {
+     "ticker": "NST",
+     "name": "Northern Star Resources",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 25.65,
+      "display_value": "25.65",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 25.94,
+      "change_pct": -1.12,
+      "display_change": "−1.1%",
+      "provider": "Yahoo Finance (NST.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/NST.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 1.1% to A$25.65 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (NST)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.nst",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 1.1% to A$25.65 on Friday. No new ASX announcement."
+    },
+    "NXT": {
+     "ticker": "NXT",
+     "name": "Nextdc",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 10.4,
+      "display_value": "10.40",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 9.85,
+      "change_pct": 5.58,
+      "display_change": "+5.6%",
+      "provider": "Yahoo Finance (NXT.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/NXT.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 5.6% to A$10.40 on Friday. ASX announcements: “Becoming a substantial holder”, 6 Nov 8:22am AEDT; “Change in Venue - Annual General Meeting”, 6 Nov 11:59am AEDT; “Becoming a substantial holder”, 6 Nov 4:48pm AEDT.",
+     "sources": [
+      {
+       "label": "ASX announcements (NXT)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.nxt",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 5.6% to A$10.40 on Friday. ASX announcements: “Becoming a substantial holder”, 6 Nov 8:22am AEDT; “Change in Venue - Annual General Meeting”, 6 Nov 11:59am AEDT; “Becoming a substantial holder”, 6 Nov 4:48pm AEDT."
+    },
+    "PME": {
+     "ticker": "PME",
+     "name": "PRO Medicus",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 205.13,
+      "display_value": "205.13",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 208.23,
+      "change_pct": -1.49,
+      "display_change": "−1.5%",
+      "provider": "Yahoo Finance (PME.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/PME.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 1.5% to A$205.13 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (PME)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.pme",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 1.5% to A$205.13 on Friday. No new ASX announcement."
+    },
+    "QBE": {
+     "ticker": "QBE",
+     "name": "QBE Insurance Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 26.75,
+      "display_value": "26.75",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 25.89,
+      "change_pct": 3.32,
+      "display_change": "+3.3%",
+      "provider": "Yahoo Finance (QBE.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/QBE.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 3.3% to A$26.75 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (QBE)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.qbe",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 3.3% to A$26.75 on Friday. No new ASX announcement."
+    },
+    "REA": {
+     "ticker": "REA",
+     "name": "REA Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 174.81,
+      "display_value": "174.81",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 180.01,
+      "change_pct": -2.89,
+      "display_change": "−2.9%",
+      "provider": "Yahoo Finance (REA.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/REA.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 2.9% to A$174.81 on Friday. ASX announcement: “Form 10-Q filed by News Corp with SEC”, 6 Nov 9:14am AEDT.",
+     "sources": [
+      {
+       "label": "ASX announcements (REA)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.rea",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 2.9% to A$174.81 on Friday. ASX announcement: “Form 10-Q filed by News Corp with SEC”, 6 Nov 9:14am AEDT."
+    },
+    "RIO": {
+     "ticker": "RIO",
+     "name": "RIO Tinto",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 149.93,
+      "display_value": "149.93",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 153.04,
+      "change_pct": -2.03,
+      "display_change": "−2.0%",
+      "provider": "Yahoo Finance (RIO.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/RIO.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 2.0% to A$149.93 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (RIO)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.rio",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 2.0% to A$149.93 on Friday. No new ASX announcement."
+    },
+    "SPK": {
+     "ticker": "SPK",
+     "name": "Spark NEW Zealand",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 1.685,
+      "display_value": "1.68",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 1.68,
+      "change_pct": 0.3,
+      "display_change": "+0.3%",
+      "provider": "Yahoo Finance (SPK.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/SPK.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 0.3% to A$1.68 on Friday. ASX announcements: “Spark's 2026 Annual Meeting Materials”, 6 Nov 7:49am AEDT; “Spark New Zealand Limited's Annual Meeting Results 2026”, 6 Nov 11:18am AEDT.",
+     "sources": [
+      {
+       "label": "ASX announcements (SPK)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.spk",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 0.3% to A$1.68 on Friday. ASX announcements: “Spark's 2026 Annual Meeting Materials”, 6 Nov 7:49am AEDT; “Spark New Zealand Limited's Annual Meeting Results 2026”, 6 Nov 11:18am AEDT.",
+     "insight": "Spark New Zealand was unchanged on Friday after releasing its annual meeting materials and results; telecoms rose about 0.2% in a defensive shift while the ASX 200 fell 0.5%. New Zealand votes today, with preliminary results due after 7pm.",
+     "insight_sources": [
+      {
+       "label": "ASX announcements, SPK",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/SPK/announcements"
+      },
+      {
+       "label": "Electoral Commission NZ",
+       "url": "https://www.electionresults.govt.nz/"
+      }
+     ]
+    },
+    "STO": {
+     "ticker": "STO",
+     "name": "Santos",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 8.56,
+      "display_value": "8.56",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 8.56,
+      "change_pct": 0.0,
+      "display_change": "±0.0%",
+      "provider": "Yahoo Finance (STO.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/STO.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Little changed at A$8.56 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (STO)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.sto",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Little changed at A$8.56 on Friday. No new ASX announcement."
+    },
+    "SUN": {
+     "ticker": "SUN",
+     "name": "Suncorp Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 20.29,
+      "display_value": "20.29",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 20.07,
+      "change_pct": 1.1,
+      "display_change": "+1.1%",
+      "provider": "Yahoo Finance (SUN.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/SUN.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 1.1% to A$20.29 on Friday. ASX announcement: “Update - Notification of buy-back - SUN”, 6 Nov 7:37am AEDT.",
+     "sources": [
+      {
+       "label": "ASX announcements (SUN)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.sun",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 1.1% to A$20.29 on Friday. ASX announcement: “Update - Notification of buy-back - SUN”, 6 Nov 7:37am AEDT.",
+     "insight": "Suncorp rose 0.7% on Friday as financials gained about 0.6%. UBS said insurers are among the ASX stocks least exposed to an AI unwind and is overweight the group; Suncorp's only filing was a buy-back update.",
+     "insight_sources": [
+      {
+       "label": "Market Index, ASX live, 6 Nov",
+       "url": "https://www.marketindex.com.au/news/asx-200-live-today-friday-6th-november"
+      },
+      {
+       "label": "ASX announcements, SUN",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/SUN/announcements"
+      }
+     ]
+    },
+    "TCL": {
+     "ticker": "TCL",
+     "name": "Transurban Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 14.6,
+      "display_value": "14.60",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 14.43,
+      "change_pct": 1.18,
+      "display_change": "+1.2%",
+      "provider": "Yahoo Finance (TCL.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/TCL.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 1.2% to A$14.60 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (TCL)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.tcl",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 1.2% to A$14.60 on Friday. No new ASX announcement."
+    },
+    "TLS": {
+     "ticker": "TLS",
+     "name": "Telstra Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 5.1,
+      "display_value": "5.10",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 5.03,
+      "change_pct": 1.39,
+      "display_change": "+1.4%",
+      "provider": "Yahoo Finance (TLS.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/TLS.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 1.4% to A$5.10 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (TLS)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.tls",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 1.4% to A$5.10 on Friday. No new ASX announcement."
+    },
+    "WBC": {
+     "ticker": "WBC",
+     "name": "Westpac Banking Corporation",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 37.03,
+      "display_value": "37.03",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 36.64,
+      "change_pct": 1.06,
+      "display_change": "+1.1%",
+      "provider": "Yahoo Finance (WBC.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/WBC.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 1.1% to A$37.03 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (WBC)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.wbc",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 1.1% to A$37.03 on Friday. No new ASX announcement."
+    },
+    "WDS": {
+     "ticker": "WDS",
+     "name": "Woodside Energy Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 30.74,
+      "display_value": "30.74",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 30.59,
+      "change_pct": 0.49,
+      "display_change": "+0.5%",
+      "provider": "Yahoo Finance (WDS.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/WDS.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 0.5% to A$30.74 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (WDS)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.wds",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 0.5% to A$30.74 on Friday. No new ASX announcement."
+    },
+    "WEB": {
+     "ticker": "WEB",
+     "name": "Webbeds Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 3.83,
+      "display_value": "3.83",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 3.98,
+      "change_pct": -3.77,
+      "display_change": "−3.8%",
+      "provider": "Yahoo Finance (WEB.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/WEB.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 3.8% to A$3.83 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (WEB)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.web",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 3.8% to A$3.83 on Friday. No new ASX announcement.",
+     "insight": "Web Travel Group fell 3.3% on Friday as Brent crude rose about 1.3% and Qantas raised its first-half fuel cost estimate to A$3.75 billion. It made no new ASX announcement.",
+     "insight_sources": [
+      {
+       "label": "ABC, markets live, 6 Nov",
+       "url": "https://www.abc.net.au/news/2026-11-06/asx-markets-business-live-news/107353758"
+      },
+      {
+       "label": "ASX announcements, WEB",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/WEB/announcements"
+      }
+     ]
+    },
+    "WES": {
+     "ticker": "WES",
+     "name": "Wesfarmers",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 81.33,
+      "display_value": "81.33",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 81.54,
+      "change_pct": -0.26,
+      "display_change": "−0.3%",
+      "provider": "Yahoo Finance (WES.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/WES.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 0.3% to A$81.33 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (WES)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.wes",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 0.3% to A$81.33 on Friday. No new ASX announcement."
+    },
+    "WOW": {
+     "ticker": "WOW",
+     "name": "Woolworths Group",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 42.45,
+      "display_value": "42.45",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 41.72,
+      "change_pct": 1.75,
+      "display_change": "+1.7%",
+      "provider": "Yahoo Finance (WOW.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/WOW.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Rose 1.7% to A$42.45 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (WOW)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.wow",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Rose 1.7% to A$42.45 on Friday. No new ASX announcement."
+    },
+    "WTC": {
+     "ticker": "WTC",
+     "name": "Wisetech Global",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 44.49,
+      "display_value": "44.49",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 44.84,
+      "change_pct": -0.78,
+      "display_change": "−0.8%",
+      "provider": "Yahoo Finance (WTC.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/WTC.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 0.8% to A$44.49 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (WTC)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.wtc",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 0.8% to A$44.49 on Friday. No new ASX announcement."
+    },
+    "XRO": {
+     "ticker": "XRO",
+     "name": "Xero",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 70.74,
+      "display_value": "70.74",
+      "comparison_date": "2026-11-05",
+      "comparison_value": 70.86,
+      "change_pct": -0.17,
+      "display_change": "−0.2%",
+      "provider": "Yahoo Finance (XRO.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/XRO.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "yahoo chart api"
+     },
+     "note": "Fell 0.2% to A$70.74 on Friday. No new ASX announcement.",
+     "sources": [
+      {
+       "label": "ASX announcements (XRO)",
+       "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements.xro",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": false,
+     "price_note": "Fell 0.2% to A$70.74 on Friday. No new ASX announcement."
+    },
+    "ZIP": {
+     "ticker": "ZIP",
+     "name": "ZIP Co",
+     "price": {
+      "status": "ok",
+      "session_date": "2026-11-06",
+      "value": 2.02,
+      "display_value": "2.020",
+      "change_pct": -5.61,
+      "display_change": "−5.6%",
+      "provider": "Yahoo Finance (ZIP.AX)",
+      "provider_url": "https://finance.yahoo.com/quote/ZIP.AX/",
+      "licence_note": "Yahoo Finance chart data: delayed, unofficial; Yahoo terms restrict redistribution. Shown as a cited single quote only.",
+      "from": "post snapshot"
+     },
+     "note": "Closed at A$2.020 (−5.6% Friday, +12.8% week). Market Index ranked Zip among the ASX 200's top weekly gainers at +14.5% as of Friday afternoon. ASX filings this week were buy-back updates and a 2 November notice that MUFG ceased to be a substantial holder. No new verified company news beyond those filings.",
+     "sources": [
+      {
+       "label": "Market Index",
+       "url": "https://www.marketindex.com.au/news/asx-200-live-today-friday-6th-november",
+       "claim_type": "reporting"
+      },
+      {
+       "label": "ASX announcements (ZIP)",
+       "url": "https://asx.api.markitdigital.com/asx-research/1.0/companies/ZIP/announcements",
+       "claim_type": "official_statement"
+      }
+     ],
+     "reviewed": true,
+     "next_catalyst": "AGM on 19 November.",
+     "price_note": "Fell 5.6% to A$2.020 on Friday. No new ASX announcement."
+    }
+   }
+  }
+ }
+}
