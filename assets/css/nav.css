@@ -200,6 +200,15 @@
   min-width: 0;
 }
 
+/* Tabbed Markets (Morning/Close) hides the layout sidebar and uses inline
+   chips instead. The 40rem max-width with margin: 0 then sits on the left of
+   the 72rem shell and leaves the right half of a laptop screen empty.
+   Centre a slightly wider reading column so chips and tiles can breathe. */
+.site-shell--with-nav:has(> .section-nav[hidden]) .site-main {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
 body:not(.has-section-nav) .site-main {
   max-width: var(--max-width);
   margin-inline: auto;

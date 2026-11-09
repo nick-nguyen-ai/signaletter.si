@@ -9,6 +9,14 @@ Entry shape: what changed and why, key files, PR link.
 
 ## [Unreleased]
 
+### Fixed (2026-11-09)
+- Weekday Markets pages looked half-empty on laptops. Morning/Close tabs hide the
+  left section sidebar (each tab has its own chip nav), and the CSS already
+  dropped the empty grid column, but `.site-main` stayed a left-aligned 40rem
+  (640px) column inside the 72rem shell. The article is now centred at 48rem.
+  Weekend Markets (sidebar visible) and AI pages are unchanged. Files:
+  `assets/css/nav.css`, `_layouts/default.html` (cache-bust `nav.css` to `?v=8`). [#74](https://github.com/nick-nguyen-ai/signaletter.si/pull/74).
+
 ### Changed (2026-11-09)
 - Public data feed omits individual shares. `export_feed.py` no longer writes the default
   watchlist, reader-pick stock rows, or `watchlist_data` into `markets.json`; the general
