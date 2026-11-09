@@ -4,13 +4,14 @@
 Usage: python3 scripts/export_feed.py OUT_DIR
 
 Writes (overwriting) for every date found in _posts/:
-  OUT_DIR/days/YYYY-MM-DD/markets.json   markets briefing (+ close wrap) and watchlist data
+  OUT_DIR/days/YYYY-MM-DD/markets.json   general markets briefing (+ close wrap); no per-share data
   OUT_DIR/days/YYYY-MM-DD/ai.json        AI report cards
   OUT_DIR/latest/markets.json            newest markets.json
   OUT_DIR/latest/ai.json                 newest ai.json
   OUT_DIR/index.json                     dates and files available
 Files for dates no longer in _posts/ are left untouched.
-Branding, site links and build metadata are removed; the export fails if any remain.
+Branding, site links, build metadata, and per-share watchlist / reader-pick
+data are removed; the export fails if branding remains.
 """
 from __future__ import annotations
 
@@ -77,24 +78,8 @@ def edition_block(fm: dict) -> dict:
         },
         "sections": fm.get("sections") or [],
         "rates": fm.get("rates") or {},
-        "watchlist": fm.get("watchlist") or [],
         "calendar": fm.get("calendar") or [],
     })
-
-
-def watchlist_data(date: str):
-    p = ROOT / "assets" / "issues" / date / "watchlist.json"
-    if not p.exists():
-        return None
-    d = json.loads(p.read_text(encoding="utf-8"))
-    out = {}
-    for name, ed in (d.get("editions") or {}).items():
-        out[name] = clean({
-            "cutoff_local": ed.get("cutoff_local"),
-            "session_date": ed.get("session_date"),
-            "stocks": ed.get("items") or {},
-        })
-    return {"retrieved_at_utc": d.get("retrieved_at_utc"), "editions": out}
 
 
 def export_markets(date: str, fm: dict, now: str) -> dict:
@@ -108,7 +93,6 @@ def export_markets(date: str, fm: dict, now: str) -> dict:
         "edition": fm.get("edition"),
         "morning": edition_block(fm),
         "close": edition_block(close) if close else None,
-        "watchlist_data": watchlist_data(date),
         "disclaimer": DISCLAIMER,
     }
 

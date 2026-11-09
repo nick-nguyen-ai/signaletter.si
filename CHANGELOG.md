@@ -9,6 +9,14 @@ Entry shape: what changed and why, key files, PR link.
 
 ## [Unreleased]
 
+### Changed (2026-11-09)
+- Public data feed omits individual shares. `export_feed.py` no longer writes the default
+  watchlist, reader-pick stock rows, or `watchlist_data` into `markets.json`; the general
+  market update (summary, story cards, index/commodity quotes, rates, calendar, close wrap)
+  and `ai.json` stay as they are. Why: the internal consumer only needs the general market
+  and AI updates. Files: `scripts/export_feed.py`, `scripts/tests/test_export_feed.py`,
+  `ARCHITECTURE.md`. [#72](https://github.com/nick-nguyen-ai/signaletter.si/pull/72).
+
 ### Fixed (2026-11-05)
 - Auto-merge now waits for CI. `auto-merge-issues.yml` merged daily `cursor/issue-*` PRs even when CI
   jobs failed (#61, #62 merged with `python` red). It now polls the PR head's check runs and squash-merges
