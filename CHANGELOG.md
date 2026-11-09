@@ -29,6 +29,7 @@ Entry shape: what changed and why, key files, PR link.
     signal title use the topic label.
   Files: `assets/css/refresh.css` (new, loaded last), `_layouts/default.html`, `_includes/top-nav.html`,
   `_includes/ai-report.html`, `_includes/topic-body.html`, `index.html`, `archive.html`, `ARCHITECTURE.md`.
+  [#75](https://github.com/nick-nguyen-ai/signaletter.si/pull/75).
 
 ### Fixed (2026-11-09)
 - Weekday Markets pages looked half-empty on laptops. Morning/Close tabs hide the
