@@ -65,6 +65,18 @@ def front_matter(path: Path) -> dict:
     return yaml.safe_load(text.split("---", 2)[1]) or {}
 
 
+def market_quotes(quotes):
+    """Index/FX/rates/commodity quotes only — drop per-share watchlist rows."""
+    out = []
+    for q in quotes or []:
+        if not isinstance(q, dict):
+            continue
+        if q.get("tier") == "watchlist" or str(q.get("id") or "").startswith("wl_"):
+            continue
+        out.append(q)
+    return out
+
+
 def edition_block(fm: dict) -> dict:
     snap = fm.get("snapshot") or {}
     return clean({
@@ -74,7 +86,7 @@ def edition_block(fm: dict) -> dict:
         "prices": {
             "retrieved_at_utc": snap.get("retrieved_at_utc"),
             "cutoff_utc": snap.get("cutoff_utc"),
-            "quotes": snap.get("quotes") or [],
+            "quotes": market_quotes(snap.get("quotes")),
         },
         "sections": fm.get("sections") or [],
         "rates": fm.get("rates") or {},

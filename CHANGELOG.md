@@ -16,6 +16,9 @@ Entry shape: what changed and why, key files, PR link.
   and `ai.json` stay as they are. Why: the internal consumer only needs the general market
   and AI updates. Files: `scripts/export_feed.py`, `scripts/tests/test_export_feed.py`,
   `ARCHITECTURE.md`. [#72](https://github.com/nick-nguyen-ai/signaletter.si/pull/72).
+- Also drop per-share price rows (`tier: watchlist` / `wl_*` ids) from `prices.quotes`
+  in the markets export. Files: `scripts/export_feed.py`, `scripts/tests/test_export_feed.py`.
+  PR link pending.
 
 ### Fixed (2026-11-05)
 - Auto-merge now waits for CI. `auto-merge-issues.yml` merged daily `cursor/issue-*` PRs even when CI

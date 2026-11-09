@@ -29,7 +29,12 @@ def main():
         markets = json.loads((out / "latest/markets.json").read_text())
         assert "watchlist_data" not in markets
         for part in (markets.get("morning") or {}, markets.get("close") or {}):
+            if not part:
+                continue
             assert "watchlist" not in part
+            for q in (part.get("prices") or {}).get("quotes") or []:
+                assert q.get("tier") != "watchlist"
+                assert not str(q.get("id") or "").startswith("wl_")
         # Unchanged content keeps its timestamp (no churn commits).
         before = (out / "latest/markets.json").read_text()
         subprocess.run([sys.executable, str(ROOT / "scripts/export_feed.py"), tmp], check=True)
