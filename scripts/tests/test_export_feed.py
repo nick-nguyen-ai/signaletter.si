@@ -25,6 +25,11 @@ def main():
         assert {d["date"] for d in index["days"]} >= posts
         blob = "\n".join(p.read_text() for p in out.rglob("*.json"))
         assert not re.search(r"signaletter|little made|briefing@|workers\.dev|\]\(/", blob, re.I)
+        # Markets export is general update only: no default/reader-pick share rows.
+        markets = json.loads((out / "latest/markets.json").read_text())
+        assert "watchlist_data" not in markets
+        for part in (markets.get("morning") or {}, markets.get("close") or {}):
+            assert "watchlist" not in part
         # Unchanged content keeps its timestamp (no churn commits).
         before = (out / "latest/markets.json").read_text()
         subprocess.run([sys.executable, str(ROOT / "scripts/export_feed.py"), tmp], check=True)
