@@ -57,8 +57,10 @@ description: Browse all SignaLetter issues by month, topic, or search.
                 >
                   <time datetime="{{ p.date | date: '%Y-%m-%d' }}">{{ p.date | date: "%-d %b" }}</time>
                   <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
-                  <span class="badge badge--{{ p.section }}">{{ p.section }}</span>
-                  {% if p.edition %}<span class="badge badge--{{ p.edition }}">{{ p.edition }}</span>{% endif %}
+                  <span class="archive-month__tags">
+                    <span class="badge badge--{{ p.section }}">{{ p.section }}</span>
+                    {% if p.edition %}<span class="badge badge--{{ p.edition }}">{{ p.edition }}</span>{% endif %}
+                  </span>
                 </li>
               {% endif %}
             {% endfor %}

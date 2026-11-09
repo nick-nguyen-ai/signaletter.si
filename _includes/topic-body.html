@@ -9,7 +9,8 @@
   <p class="empty-state">No issues yet for this topic.</p>
 {% else %}
   {% assign use_ai_cards = false %}
-  {% if post.section == "ai" and post.signal and post.sections %}
+  {%- comment -%} Any topic using the signal + sections card schema gets the card report. {%- endcomment -%}
+  {% if post.signal and post.sections %}
     {% assign use_ai_cards = true %}
   {% endif %}
 

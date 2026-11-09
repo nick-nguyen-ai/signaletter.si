@@ -3,6 +3,14 @@
   Expects: include.post
 {%- endcomment -%}
 {% assign post = include.post %}
+{%- comment -%}
+  Topic label from _data/topics.yml so any topic whose posts use the
+  signal + sections card format renders with this layout (not only AI).
+{%- endcomment -%}
+{% assign topic_label = post.section | upcase %}
+{% for t in site.data.topics %}
+  {% if t.section == post.section %}{% assign topic_label = t.label %}{% endif %}
+{% endfor %}
 {% assign total_cards = 0 %}
 {% for sec in post.sections %}
   {% assign total_cards = total_cards | plus: sec.cards.size %}
@@ -11,7 +19,7 @@
 <article
   class="ai-report topic-issue"
   data-ai-report
-  data-topic="ai"
+  data-topic="{{ post.section | escape }}"
   data-day="{{ post.date | date: '%Y-%m-%d' }}"
 >
   {%- comment -%} Mobile: sticky horizontal chip row (desktop uses sidebar only) {%- endcomment -%}
@@ -55,14 +63,15 @@
           <time class="visually-hidden" datetime="{{ post.date | date: '%Y-%m-%d' }}">
             {{ post.date | date: "%A %-d %B %Y" }}
           </time>
-          <span class="badge badge--ai">AI</span>
+          <span class="badge badge--{{ post.section | escape }}">{{ topic_label | escape }}</span>
+          <span class="ai-report__count">{{ total_cards }} stories · {{ post.sections.size }} sections</span>
         </div>
         <h1 class="ai-report__title">{{ post.title | escape }}</h1>
       </header>
 
       {% if post.signal and post.signal.size > 0 %}
-      <section class="ai-signal" aria-label="Today's AI Signal">
-        <h2 class="ai-signal__title">Today's AI Signal</h2>
+      <section class="ai-signal ai-signal--n{{ post.signal.size }}" aria-labelledby="ai-signal-h">
+        <h2 class="ai-signal__title" id="ai-signal-h">Today's {{ topic_label | escape }} signal</h2>
         <ol class="ai-signal__grid" data-ai-signal>
           {% for item in post.signal %}
             {% assign sig_sec_name = item.section_id %}
@@ -81,10 +90,19 @@
                 {% endif %}
               {% endfor %}
             {% endfor %}
-            <li class="ai-signal__card">
-              <span class="ai-signal__num" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
-              <p class="ai-signal__cat">{{ sig_sec_name | escape }}</p>
-              <h3 class="ai-signal__headline">{{ item.headline | escape }}</h3>
+            <li class="ai-signal__card{% if forloop.first %} ai-signal__card--lead{% endif %}">
+              <p class="ai-signal__kicker">
+                <span class="ai-signal__num" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+                <span class="ai-signal__cat">{{ sig_sec_name | escape }}</span>
+              </p>
+              <h3 class="ai-signal__headline">
+                <a
+                  class="ai-signal__link"
+                  href="#{{ item.card_id | escape }}"
+                  data-ai-jump="{{ item.card_id | escape }}"
+                  data-ai-jump-sec="{{ item.section_id | escape }}"
+                >{{ item.headline | escape }}</a>
+              </h3>
               {% if sig_why != "" %}
                 <p class="ai-signal__why">{{ sig_why | escape }}</p>
               {% endif %}
@@ -93,6 +111,8 @@
                 href="#{{ item.card_id | escape }}"
                 data-ai-jump="{{ item.card_id | escape }}"
                 data-ai-jump-sec="{{ item.section_id | escape }}"
+                aria-hidden="true"
+                tabindex="-1"
               >Read analysis</a>
             </li>
           {% endfor %}
@@ -134,8 +154,9 @@
             data-ai-section-kind="{{ sec_kind }}"
           >
             <h2 class="ai-sec-heading">
-              {{ forloop.index }}. {{ sec.name | escape }}
-              <span class="ai-sec-heading__count">{{ sec.cards.size }}</span>
+              <span class="ai-sec-heading__num" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+              <span class="ai-sec-heading__name">{{ sec.name | escape }}</span>
+              <span class="ai-sec-heading__count">{{ sec.cards.size }}<span class="visually-hidden"> stories</span></span>
             </h2>
 
             {% for card in sec.cards %}
