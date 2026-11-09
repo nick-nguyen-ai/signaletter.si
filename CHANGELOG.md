@@ -9,6 +9,27 @@ Entry shape: what changed and why, key files, PR link.
 
 ## [Unreleased]
 
+### Changed (2026-11-09) — UI refresh
+- Site-wide UI refresh for phone, laptop and monitor widths; brand (colours, fonts, logo) unchanged.
+  - **AI page top:** "Today's AI signal" was three narrow equal columns (cramped headlines, ragged
+    heights). It is now one panel with a lead story and the other stories beside it on wide
+    screens (lead across the top on tablets, stacked on phones). Headlines are the links.
+  - **Layout:** header, content and footer share one centred 76rem shell. Sidebar + reading column
+    (46rem) are centred together on AI and weekend Markets pages, so laptops and monitors no longer
+    show an empty right third. Slight type scale-up from 1600px.
+  - **Header:** one bar — brand | topics (underline for the active topic) | Sign in + share.
+  - **Section headings:** card reports and Markets share one style (rule, serif title, count).
+    Story cards drop the repeated category label (the section heading names it).
+  - **Home:** each briefing panel lists today's top three items (AI signal headlines, Markets
+    close or morning summary) instead of only a title; watchlist sign-up is a full-width band.
+  - **Archive:** title, date and tags sit on one row on tablet and up; date + tags share a meta
+    line on phones.
+  - **Extensible topics:** any topic in `_data/topics.yml` whose posts use the `signal` +
+    `sections` card format now gets the card report (previously AI only); the badge and
+    signal title use the topic label.
+  Files: `assets/css/refresh.css` (new, loaded last), `_layouts/default.html`, `_includes/top-nav.html`,
+  `_includes/ai-report.html`, `_includes/topic-body.html`, `index.html`, `archive.html`, `ARCHITECTURE.md`.
+
 ### Fixed (2026-11-09)
 - Weekday Markets pages looked half-empty on laptops. Morning/Close tabs hide the
   left section sidebar (each tab has its own chip nav), and the CSS already

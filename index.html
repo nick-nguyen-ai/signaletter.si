@@ -3,12 +3,23 @@ layout: default
 nav_active: home
 # No page title — home SEO uses site.title (SignaLetter)
 ---
+{%- comment -%}
+  Front page: today's briefings, one panel per topic in _data/topics.yml.
+  Each panel lists the issue's top items so readers see the news before
+  clicking: card-format posts (signal + sections) list their signal
+  headlines; Markets lists the close summary when there is one, else the
+  morning summary. A new topic needs no change here.
+{%- endcomment -%}
+{% assign newest = site.posts | first %}
 
 <section class="landing" aria-labelledby="landing-heading">
-  <p class="landing__eyebrow">Signa<span class="site-brand__l">L</span>etter</p>
-  <p class="landing__meta">Markets · AI · 08:25 AEDT</p>
-  <h1 class="landing__hero" id="landing-heading">Signal over noise.</h1>
-  <p class="landing__subline">The few things that matter today.</p>
+  <header class="landing__masthead">
+    <p class="landing__meta">
+      {% if newest %}<time datetime="{{ newest.date | date: '%Y-%m-%d' }}">{{ newest.date | date: "%A %-d %B %Y" }}</time> · {% endif %}Published 08:25 Sydney
+    </p>
+    <h1 class="landing__hero" id="landing-heading">Signal over noise.</h1>
+    <p class="landing__subline">The few things that matter today, in {% for topic in site.data.topics %}{% if forloop.last and forloop.length > 1 %} and {% elsif forloop.index > 1 %}, {% endif %}{{ topic.label }}{% endfor %}.</p>
+  </header>
 
   <div class="landing__cards">
     {% for topic in site.data.topics %}
@@ -20,28 +31,57 @@ nav_active: home
           {% endif %}
         {% endif %}
       {% endfor %}
-      <a class="landing-card landing-card--{{ topic.id }}" href="{{ topic.path | relative_url }}">
-        <span class="landing-card__topic">{{ topic.label }}</span>
+      <article class="landing-card landing-card--{{ topic.id }}" aria-labelledby="landing-{{ topic.id }}-h">
+        <p class="landing-card__topic">
+          <span>{{ topic.label }}</span>
+          {% if latest %}
+            {% if topic.section == "markets" %}
+              <span class="landing-card__status">{% if latest.close %}After the close{% else %}Morning briefing{% endif %}</span>
+            {% endif %}
+          {% endif %}
+        </p>
         {% if latest %}
-          <span class="landing-card__title">{{ latest.title }}</span>
+          <h2 class="landing-card__title" id="landing-{{ topic.id }}-h">
+            <a href="{{ topic.path | relative_url }}">{{ latest.title }}</a>
+          </h2>
           <time class="landing-card__date" datetime="{{ latest.date | date: '%Y-%m-%d' }}">
             {{ latest.date | date: "%-d %B %Y" }}
           </time>
-          {% if topic.section == "markets" %}
-            <span class="landing-card__status">{% if latest.close %}Updated after the close{% else %}Morning briefing{% endif %}</span>
+
+          {% if latest.signal and latest.signal.size > 0 %}
+            <ol class="landing-card__items">
+              {% for item in latest.signal limit: 3 %}
+                <li><a href="{{ topic.path | relative_url }}#{{ item.card_id | escape }}">{{ item.headline | escape }}</a></li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            {% assign items = latest.summary %}
+            {% if latest.close and latest.close.summary %}
+              {% assign items = latest.close.summary %}
+            {% endif %}
+            {% if items and items.size > 0 %}
+              <ol class="landing-card__items">
+                {% for item in items limit: 3 %}
+                  <li>{{ item | markdownify | strip_html | truncatewords: 28 }}</li>
+                {% endfor %}
+              </ol>
+            {% endif %}
           {% endif %}
+
+          <a class="landing-card__cta" href="{{ topic.path | relative_url }}">Read the {{ topic.label }} briefing<span aria-hidden="true"> →</span></a>
         {% else %}
-          <span class="landing-card__title">No issues yet</span>
+          <h2 class="landing-card__title" id="landing-{{ topic.id }}-h">No issues yet</h2>
         {% endif %}
-        <span class="landing-card__cta">Open {{ topic.label }} →</span>
-      </a>
+      </article>
     {% endfor %}
   </div>
 
   {%- if site.watchlist_api %}
   <aside class="wl-promo" data-wl-promo aria-labelledby="wl-promo-h">
-    <h2 class="wl-promo__h" id="wl-promo-h">Track your own shares</h2>
-    <p class="wl-promo__p">Sign in with your email and we'll send you a link. Pick up to 10 ASX shares for the watchlist on each Markets page. Everything else stays the same for everyone.</p>
+    <div class="wl-promo__copy">
+      <h2 class="wl-promo__h" id="wl-promo-h">Track your own shares</h2>
+      <p class="wl-promo__p">Sign in with your email and we'll send you a link. Pick up to 10 ASX shares for the watchlist on each Markets page. Everything else stays the same for everyone.</p>
+    </div>
     <form class="wl-form" data-wl-quick-form novalidate>
       <label class="wl-label" for="wl-promo-email">Email</label>
       <div class="wl-row">
@@ -55,6 +95,6 @@ nav_active: home
   {%- endif %}
 
   <p class="landing__archive">
-    <a href="{{ '/archive/' | relative_url }}">Browse the archive</a>
+    <a href="{{ '/archive/' | relative_url }}">Browse every past issue in the archive</a>
   </p>
 </section>

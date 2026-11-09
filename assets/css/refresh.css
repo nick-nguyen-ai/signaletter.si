@@ -1,0 +1,826 @@
+/* SignaLetter refresh layer (Nov 2026)
+   Loaded last. Keeps the brand (Direction C: ink, paper, teal; Source Serif 4,
+   IBM Plex Mono) and changes layout, rhythm and components:
+   - one centred shell for header, content and footer at every width
+   - header as a single bar: brand | topics | sign in + share
+   - card-format reports (AI today, any future topic): lead story + supporting
+     stories in one panel instead of three narrow columns
+   - one section-heading style for card reports and Markets
+   - home page shows each briefing's top items; archive rows on one line
+   Breakpoints: phone < 640, tablet 640–1023, laptop 1024–1439, monitor 1440+. */
+
+:root {
+  --shell: 76rem;
+  --reading: 46rem;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--ink) 6%, transparent);
+  --shadow-md: 0 1px 2px color-mix(in srgb, var(--ink) 5%, transparent),
+    0 8px 24px -12px color-mix(in srgb, var(--ink) 18%, transparent);
+  --rule-strong: var(--text);
+}
+
+/* Monitors: scale the whole system up a touch so the page doesn't read small. */
+@media (min-width: 1600px) {
+  html {
+    font-size: 106.25%;
+  }
+
+  body {
+    font-size: 18px;
+  }
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ============ Shell: one width for header, content, footer ============ */
+
+.site-header__bar,
+.site-shell,
+.site-footer__inner {
+  max-width: var(--shell);
+}
+
+/* ============ Header ============ */
+
+.site-header__bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 0.75rem;
+}
+
+.top-nav {
+  justify-self: start;
+  gap: 0.1rem;
+}
+
+.top-nav__link {
+  position: relative;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.top-nav__link:hover {
+  color: var(--text);
+}
+
+.top-nav__link--active,
+.top-nav__link--active:hover {
+  color: var(--text);
+  background: transparent;
+}
+
+.top-nav__link--active::after {
+  content: "";
+  position: absolute;
+  left: 0.55rem;
+  right: 0.55rem;
+  bottom: 0.45rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.site-header__end {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-self: end;
+}
+
+.site-auth {
+  margin-left: 0;
+}
+
+.site-auth__btn {
+  border-radius: 999px;
+  padding: 0 0.95rem;
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+.site-auth__btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.share-btn--header {
+  border-radius: 999px;
+}
+
+@media (min-width: 1024px) {
+  .site-header__bar {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    padding-block: 0.7rem;
+  }
+
+  .top-nav {
+    justify-self: center;
+    gap: 0.4rem;
+  }
+
+  .top-nav__link {
+    padding: 0.4rem 0.7rem;
+  }
+
+  .top-nav__link--active::after {
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.05rem;
+  }
+}
+
+/* ============ Card-format report (AI and any topic using signal + sections) ============ */
+
+.ai-report__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ai-report__count {
+  font: 500 0.72rem var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ai-report__title {
+  font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  margin-top: 0.55rem;
+  text-wrap: balance;
+}
+
+.ai-report__header {
+  margin-bottom: 1.5rem;
+}
+
+.ai-report__main {
+  max-width: var(--reading);
+}
+
+@media (min-width: 900px) {
+  .ai-report__layout {
+    grid-template-columns: 13.5rem minmax(0, var(--reading));
+    justify-content: center;
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .ai-report__side {
+    padding-top: 0.35rem;
+  }
+
+  .ai-report__side-link {
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.3;
+  }
+
+  .ai-report__side-link.is-active {
+    background: var(--bg-elevated);
+    box-shadow: inset 2px 0 0 var(--accent), var(--shadow-sm);
+    color: var(--text);
+  }
+}
+
+/* —— Today's signal: lead story + supporting stories in one panel —— */
+
+.ai-signal {
+  container-type: inline-size;
+  margin-bottom: 1.5rem;
+}
+
+.ai-signal__title {
+  margin-bottom: 0.7rem;
+}
+
+.ai-signal__grid {
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.ai-signal__card {
+  border: 0;
+  border-radius: 0;
+  min-height: 0;
+  padding: 1.15rem 1.2rem 0.6rem;
+  gap: 0.4rem;
+  background: var(--bg-elevated);
+}
+
+.ai-signal__kicker {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.ai-signal__num {
+  font-size: 0.72rem;
+}
+
+.ai-signal__cat {
+  font-size: 0.66rem;
+}
+
+.ai-signal__headline {
+  font-size: 1.12rem;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.ai-signal__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ai-signal__link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+/* Whole card clickable via the headline link; CTA is a visual cue only. */
+.ai-signal__card {
+  position: relative;
+}
+
+.ai-signal__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.ai-signal__card:hover {
+  background: color-mix(in srgb, var(--bg-elevated) 92%, var(--accent-soft));
+}
+
+.ai-signal__why {
+  font-size: 0.93rem;
+  line-height: 1.55;
+  margin: 0.1rem 0 0.2rem;
+}
+
+.ai-signal__cta {
+  pointer-events: none;
+  font-size: 0.82rem;
+}
+
+.ai-signal__card--lead {
+  padding: 1.35rem 1.35rem 0.75rem;
+  box-shadow: inset 0 3px 0 var(--accent);
+}
+
+.ai-signal__card--lead .ai-signal__headline {
+  font-size: clamp(1.3rem, 1rem + 1.4vw, 1.6rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+.ai-signal__card--lead .ai-signal__why {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+/* Medium panel: lead across the top, the rest in two columns. */
+@container (min-width: 34rem) {
+  .ai-signal__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ai-signal__card--lead {
+    grid-column: 1 / -1;
+  }
+
+  .ai-signal__card:not(.ai-signal__card--lead) .ai-signal__why {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Wide panel with three stories: lead on the left, two stacked on the right. */
+@container (min-width: 42rem) {
+  .ai-signal--n3 .ai-signal__grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+
+  .ai-signal--n3 .ai-signal__card--lead {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding: 1.6rem 1.6rem 1rem;
+  }
+
+  .ai-signal--n3 .ai-signal__card:not(.ai-signal__card--lead) .ai-signal__why {
+    -webkit-line-clamp: 4;
+  }
+}
+
+/* —— Verdict legend: one quiet line —— */
+
+.ai-verdict-legend {
+  border-top: 0;
+  padding: 0 0 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.ai-verdict-legend__label {
+  display: none;
+}
+
+.ai-verdict-legend__list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.1rem;
+}
+
+.ai-verdict-legend__item {
+  flex: 0 1 auto;
+  max-width: none;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+}
+
+.ai-verdict-legend .ai-verdict {
+  min-height: 0;
+  padding: 0.12rem 0.5rem;
+  font-size: 0.66rem;
+}
+
+/* —— Section headings (card reports and Markets share one style) —— */
+
+/* h2.* so these beat .issue-body h2 in style.css */
+h2.ai-sec-heading,
+h2.mk-section__title {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.65rem;
+  margin: 2.5rem 0 1rem;
+  padding-top: 0.7rem;
+  border-top: 2px solid var(--rule-strong);
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-transform: none;
+  color: var(--text);
+}
+
+.mk-section__title::after {
+  content: none;
+}
+
+.ai-sec-heading__num {
+  font: 600 0.75rem var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.ai-sec-heading__name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ai-sec-heading__count {
+  flex: 0 0 auto;
+  min-width: 1.6rem;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-align: center;
+  font-size: 0.72rem;
+}
+
+.mk-section {
+  margin-top: 0;
+}
+
+.mk-section__note {
+  margin-top: -0.5rem;
+}
+
+/* —— Story cards —— */
+
+.ai-card {
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ai-card:hover {
+  border-color: color-mix(in srgb, var(--text) 22%, var(--border));
+  box-shadow: var(--shadow-md);
+}
+
+.ai-card.is-open {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.ai-card__summary {
+  padding: 1.1rem 1.25rem 0.5rem;
+}
+
+/* The section heading already names the category. */
+.ai-card__cat {
+  display: none;
+}
+
+.ai-card__top {
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.ai-card__top:empty {
+  display: none;
+}
+
+.ai-verdict {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.01em;
+}
+
+.ai-card__headline {
+  font-size: 1.16rem;
+  line-height: 1.32;
+  text-wrap: pretty;
+}
+
+.ai-card__takeaway {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.ai-card__toggle {
+  gap: 0.35rem;
+  font-size: 0.84rem;
+}
+
+.ai-card__toggle::after {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.ai-card.is-open .ai-card__toggle::after {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.ai-card__det {
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 45%, var(--bg-elevated));
+}
+
+/* ============ Markets ============ */
+
+.mk-body > .mk-section:first-child .mk-section__title,
+.topic-section:first-of-type .mk-section__title {
+  margin-top: 1.25rem;
+}
+
+/* ============ Home ============ */
+
+body:has(.landing) .site-main {
+  max-width: 64rem;
+}
+
+.landing {
+  padding: clamp(1.5rem, 4vw, 3.25rem) 0 3rem;
+}
+
+.landing__masthead {
+  padding-bottom: clamp(1.25rem, 3vw, 2rem);
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+  border-bottom: 2px solid var(--rule-strong);
+}
+
+.landing__meta {
+  margin-bottom: 0.9rem;
+}
+
+.landing__hero {
+  font-size: clamp(2.4rem, 1.6rem + 4vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: none;
+}
+
+.landing__subline {
+  margin: 0.85rem 0 0;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  max-width: 36rem;
+}
+
+.landing__cards {
+  gap: 1rem;
+}
+
+@media (min-width: 800px) {
+  .landing__cards {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.landing-card {
+  gap: 0.25rem;
+  padding: 1.35rem 1.4rem 1.2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.landing-card:hover {
+  background: var(--bg-elevated);
+  border-color: color-mix(in srgb, var(--text) 22%, var(--border));
+  box-shadow: var(--shadow-md);
+}
+
+.landing-card__topic {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0 0 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.landing-card__status {
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.landing-card__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.landing-card__title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.landing-card__title a:hover {
+  color: var(--accent);
+}
+
+.landing-card__items {
+  margin: 0.9rem 0 0.4rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: item;
+}
+
+.landing-card__items li {
+  counter-increment: item;
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.landing-card__items li::before {
+  content: counter(item, decimal-leading-zero);
+  padding-top: 0.2rem;
+  font: 600 0.7rem var(--font-mono);
+  color: var(--accent);
+}
+
+.landing-card__items a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.landing-card__items a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.landing-card__cta {
+  margin-top: auto;
+  padding-top: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  font-size: 0.86rem;
+  text-decoration: none;
+}
+
+.landing-card__cta:hover {
+  text-decoration: underline;
+}
+
+.wl-promo {
+  max-width: none;
+  margin: 1.25rem 0 0;
+  padding: 1.35rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+}
+
+@media (min-width: 800px) {
+  .wl-promo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 0.5rem 2.5rem;
+    align-items: center;
+  }
+
+  .wl-promo .wl-label {
+    margin-top: 0;
+  }
+
+  .wl-promo__in {
+    grid-column: 1 / -1;
+  }
+}
+
+.wl-promo__h {
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+.landing__archive {
+  margin-top: 1.5rem;
+}
+
+/* ============ Archive ============ */
+
+body:has(.archive-page) .site-main {
+  max-width: var(--reading);
+}
+
+.archive-page {
+  max-width: none;
+  padding-top: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+.archive-page__title {
+  font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+
+.archive-search__input {
+  border-radius: 999px;
+  padding-inline: 1.1rem;
+}
+
+.archive-month__summary {
+  margin-top: 1.25rem;
+  padding: 0.5rem 0;
+  border-top: 2px solid var(--rule-strong);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.archive-month__item,
+.archive-month__item:nth-child(n) {
+  grid-template-columns: 3.75rem minmax(0, 1fr);
+  align-items: center;
+  row-gap: 0.15rem;
+  padding: 0.7rem 0;
+}
+
+.archive-month__item a {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+}
+
+/* Phone: date and tags share a meta line, title below at full width. */
+.archive-month__item time {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.archive-month__tags {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.archive-month__item > a {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+.archive-month__item .archive-month__tags .badge {
+  grid-column: auto;
+  justify-self: auto;
+  font-size: 0.62rem;
+}
+
+@media (min-width: 640px) {
+  .archive-month__item,
+  .archive-month__item:nth-child(n) {
+    grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+  }
+
+  .archive-month__item time,
+  .archive-month__item > a,
+  .archive-month__tags {
+    grid-row: auto;
+    grid-column: auto;
+  }
+
+  .archive-month__tags {
+    justify-content: flex-end;
+  }
+}
+
+/* ============ My shares page and 404: shared card treatment ============ */
+
+.wl-card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============ Footer ============ */
+
+.site-footer {
+  margin-top: 2rem;
+}
+
+/* ============ Pages with the generic section sidebar (weekend Markets) ============ */
+
+@media (min-width: 1024px) {
+  /* Centre sidebar + reading column as one unit instead of leaving the right third empty. */
+  .site-shell--with-nav {
+    grid-template-columns: 13.5rem minmax(0, var(--reading));
+    justify-content: center;
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .site-shell--with-nav .site-main {
+    max-width: var(--reading);
+  }
+
+  /* Card reports draw their own sidebar inside the article. */
+  body:has(.ai-report) .site-shell--with-nav,
+  .site-shell--with-nav:has(> .section-nav[hidden]) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body:has(.ai-report) .site-shell--with-nav .site-main {
+    max-width: none;
+  }
+
+  .section-nav__item {
+    border-radius: var(--radius-sm);
+  }
+
+  .section-nav__item--active {
+    box-shadow: inset 2px 0 0 var(--accent), var(--shadow-sm);
+  }
+}
+
+/* Older/newer links under an issue: line up with the issue, not the page edge. */
+.issue-nav {
+  max-width: calc(13.5rem + 3.5rem + var(--reading));
+  margin-inline: auto;
+}

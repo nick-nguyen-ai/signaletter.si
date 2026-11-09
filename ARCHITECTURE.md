@@ -10,6 +10,10 @@ How https://signaletter.si works end to end. Read this, then `CHANGELOG.md`, the
 - Layouts/includes: `_layouts/default.html`, `_layouts/day.html`, `_includes/markets-report.html`,
   `_includes/markets/*` (tiles, cards, Morning/Close `edition-body.html`), `_includes/ai-report.html`.
 - Data: `_data/watchlist.csv` (default watchlist), `_data/brent.csv`, `_data/gold.csv`, `_data/charts.yml`, `_data/topics.yml`.
+- Styles: base sheets in `assets/css` plus `assets/css/refresh.css`, loaded last in `default.html`
+  (shared shell width, header, card-report signal panel, section headings, home and archive).
+  Any topic whose posts carry `signal` + `sections` front matter renders with `_includes/ai-report.html`;
+  the home page lists each topic's top items (signal headlines, or Markets `close.summary` / `summary`).
 - Assets: `assets/css`, `assets/js` (`my-watchlist.js`, `ai-cards.js`, `section-nav.js`, `share.js`), `assets/brand`,
   `assets/og`, `assets/data/asx-tickers.json`, `assets/data/watchlist-default-tickers.txt`.
 - Per-day machine files: `assets/issues/YYYY-MM-DD/` (`snapshot.json`, `close-snapshot.json`, `watchlist.json`, content YAML).

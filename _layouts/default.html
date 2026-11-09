@@ -22,11 +22,14 @@
   <link rel="stylesheet" href="{{ '/assets/css/nav.css' | relative_url }}?v=8">
   <link rel="stylesheet" href="{{ '/assets/css/share.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/markets.css' | relative_url }}?v=8">
+  {%- comment -%} Refresh layer: shared layout, type and component polish. Loaded after the
+       base sheets (and watchlist.css below) so it wins without !important. {%- endcomment -%}
   {%- if site.watchlist_api %}
   <meta name="sl-watchlist-api" content="{{ site.watchlist_api }}">
   <meta name="sl-watchlist-tier" content="{{ site.watchlist_info_tier | default: 'full' }}">
   <link rel="stylesheet" href="{{ '/assets/css/watchlist.css' | relative_url }}?v=2">
   {%- endif %}
+  <link rel="stylesheet" href="{{ '/assets/css/refresh.css' | relative_url }}?v=1">
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
 </head>
 <body class="layout-{{ page.layout | default: 'default' }}{% if page.topic or page.section %} has-section-nav{% endif %}">
