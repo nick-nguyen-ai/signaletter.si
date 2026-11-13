@@ -9,6 +9,9 @@ Entry shape: what changed and why, key files, PR link.
 
 ## [Unreleased]
 
+### Fixed (2026-11-14) — flaky QA test
+- `test_bad_change_math_rejected` used a fixed bad value (5.0 bp) that equalled the real US 10Y change in the 14 Nov issue, so the test passed the "bad" data and CI failed, blocking auto-merge. It now offsets the real value by 7 bp. File: `scripts/tests/test_qa_markets.py`.
+
 ### Changed (2026-11-09) — UI refresh
 - Site-wide UI refresh for phone, laptop and monitor widths; brand (colours, fonts, logo) unchanged.
   - **AI page top:** "Today's AI signal" was three narrow equal columns (cramped headlines, ragged
