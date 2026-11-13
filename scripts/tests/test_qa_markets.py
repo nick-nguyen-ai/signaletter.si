@@ -41,7 +41,8 @@ def test_fabricated_number_rejected():
 
 def test_bad_change_math_rejected():
     fm = copy.deepcopy(BASE)
-    quote(fm, "us10y")["change_bp"] = 5.0
+    q = quote(fm, "us10y")
+    q["change_bp"] = round(q["change_bp"] + 7.0, 1)  # always differs from the true change
     rep = run(fm)
     assert any("change_bp" in e for e in rep.errors), rep.errors
 
