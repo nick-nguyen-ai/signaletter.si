@@ -54,6 +54,16 @@ def test_daily_issue_shape_passes():  # mirrors PR #38: new posts, issue assets,
     assert verdict(r) == []
 
 
+def test_chart_csvs_allowed_on_daily_issue_pr():
+    """Long-run chart series live in _data/*.csv and must be updatable from issue-* PRs."""
+    r = make_repo()
+    write(r, "_data/brent.csv", "date,close\n2026-11-24,91.80\n")
+    write(r, "_data/gold.csv", "date,close\n2026-11-25,3535.80\n")
+    write(r, "_posts/2026-11-27-markets.md")
+    commit(r)
+    assert verdict(r) == []
+
+
 def test_allowed_delete_and_rename_pass():
     r = make_repo()
     git(r, "rm", "-q", "assets/issues/2026-10-23/snapshot.json")
