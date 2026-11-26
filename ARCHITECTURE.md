@@ -26,7 +26,7 @@ Working files for each day live in `/workspace/newsletter/YYYY-MM-DD/` on the ag
 | AI report | `ai.yml`, `newsletter.md` → `_posts/<date>-ai.md` |
 | ASX morning (weekdays) / weekend macro (Sat-Sun) | `markets-content.yml`, `markets-draft.md`, snapshot via `fetch_markets.py` |
 | Quality review | `markets.md`, `review-log.md` (fact/source checks before publish) |
-| Publish | builds the post, runs `qa_markets.py --fix`, `build_watchlist_json.py` (then merges reader-pick insights), pushes the branch and opens a `cursor/issue-<date>` PR directly with `gh` (no cloud agent, since 5 Nov 2026) |
+| Publish | builds the post, runs `qa_markets.py --fix`, `build_watchlist_json.py` (then merges reader-pick insights), runs `update_charts.py` to refresh `_data/brent.csv` / `_data/gold.csv`, pushes the branch and opens a `cursor/issue-<date>` PR directly with `gh` (no cloud agent, since 5 Nov 2026) |
 | Close wrap (~16:15) | `close-content.yml`, `close-snapshot.json`, `close-chat.md`, `close-review-log.md` → `cursor/issue-<date>-close` PR, pushed and opened directly with `gh` (no cloud agent, since 5 Nov 2026) |
 
 Reader-pick insights (since 5 Nov 2026): each extra pick is researched once a day, in the close wrap
@@ -42,7 +42,8 @@ not in any repo) records each routine's share of usage and the number of reader 
 - `qa_markets.py`: QA gate. `--fix` drops failing claims/modules; report-only mode exits 1/2 on unresolved errors (blocks merge).
 - `build_watchlist_json.py`: builds `assets/issues/<date>/watchlist.json` for defaults + every reader pick.
 - `build_asx_list.py`: allowed ticker universe (S&P/ASX 300 via VAS holdings) → `assets/data/asx-tickers.json`.
-- `check_pr_paths.py`: auto-merge path gate. `check_changelog.py`: changelog CI gate.
+- `update_charts.py`: appends settled daily closes to `_data/brent.csv` (FRED `DCOILBRENTEU`) and `_data/gold.csv` (Yahoo `GC=F`); idempotent; used by the daily publish routine.
+- `check_pr_paths.py`: auto-merge path gate (`_posts/**`, `assets/issues/**`, `_data/*.csv` — including chart CSVs). `check_changelog.py`: changelog CI gate.
 - `export_feed.py`: unbranded JSON export for the public data feed.
 - `generate_og.py`, `generate_brand.py`: brand/OG images. Tests in `scripts/tests/`.
 

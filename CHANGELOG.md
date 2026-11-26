@@ -9,6 +9,9 @@ Entry shape: what changed and why, key files, PR link.
 
 ## [Unreleased]
 
+### Added (2026-11-27) — daily long-run chart CSV updater
+- New `scripts/update_charts.py` fetches settled daily closes for Brent (FRED `DCOILBRENTEU`) and Gold (Yahoo `GC=F`) and merges them into `_data/brent.csv` / `_data/gold.csv` (idempotent; skips missing/`.` values and Yahoo's in-progress same-day bar). Daily publish should run `python3 scripts/update_charts.py`. Backfilled both CSVs through the latest settled observations. Path gate already allows `_data/*.csv` on `cursor/issue-*` PRs; tests now cover chart CSV updates explicitly. Files: `scripts/update_charts.py`, `scripts/tests/test_update_charts.py`, `scripts/tests/test_check_pr_paths.py`, `_data/brent.csv`, `_data/gold.csv`, `scripts/README.md`, `ARCHITECTURE.md`, `.github/workflows/ci.yml`.
+
 ### Fixed (2026-11-14) — flaky QA test
 - `test_bad_change_math_rejected` used a fixed bad value (5.0 bp) that equalled the real US 10Y change in the 14 Nov issue, so the test passed the "bad" data and CI failed, blocking auto-merge. It now offsets the real value by 7 bp. File: `scripts/tests/test_qa_markets.py`.
 

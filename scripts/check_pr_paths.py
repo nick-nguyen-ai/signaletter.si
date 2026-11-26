@@ -2,6 +2,9 @@
 """Auto-merge gate: a daily issue PR may only add, modify or delete files under
   _posts/**   assets/issues/**   _data/<name>.csv   (top level of _data only)
 
+Top-level chart series (_data/brent.csv, _data/gold.csv) and other _data/*.csv
+files are allowed so the daily publish routine can commit chart backfills.
+
 Every touched path counts, including deletions and both sides of a rename (renames are
 split into delete + add with --no-renames, so renaming a disallowed file out of place fails).
 Symlinks and submodules are rejected anywhere. Exit 0 = allowed, 1 = rejected.

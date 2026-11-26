@@ -27,10 +27,26 @@ python3 scripts/qa_markets.py --fix _posts/2026-10-19-markets.md
 cannot drop), 2 = unparseable. The auto-merge gate runs it report-only and blocks on 1 or 2, so always run
 `--fix` before committing and fix anything it reports as UNRESOLVED.
 
+# Long-run chart CSVs (Brent + Gold)
+
+Updates `_data/brent.csv` (FRED `DCOILBRENTEU`) and `_data/gold.csv` (Yahoo `GC=F`)
+with new settled daily closes. Idempotent; skips missing/`.` values and Yahoo's
+in-progress same-day bar until the COMEX session close (~17:00 America/New_York).
+
+```bash
+# Daily publish routine (after session closes; safe to re-run):
+python3 scripts/update_charts.py
+
+python3 scripts/update_charts.py --series brent          # one series
+python3 scripts/update_charts.py --dry-run               # fetch/merge, no write
+python3 scripts/tests/test_update_charts.py
+```
+
 # Auto-merge path gate
 
 ```bash
 python3 scripts/check_pr_paths.py origin/main HEAD      # deletions + renames included; _posts/**, assets/issues/**, _data/*.csv only
 python3 scripts/tests/test_check_pr_paths.py
 ```
+Daily `cursor/issue-*` PRs may include chart CSV updates (`_data/brent.csv`, `_data/gold.csv`).
 See docs/markets-post-format.md.

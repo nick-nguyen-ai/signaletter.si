@@ -259,9 +259,19 @@ Metadata (labels, units, sources, era markers/bands) is in `_data/charts.yml`.
 
 Charts default to **2020–now**, with quick ranges **1M / 6M / 1Y / Since war / 2020–now**. Long ranges downsample to weekly for mobile performance. Each chart header shows the latest print and change vs a year ago. Era overlays: COVID (Mar 2020), Ukraine (24 Feb 2022), Biden band, Trump 2nd-term band, US–Iran war (28 Feb 2026). All issues share the same CSV files (intended — the line is always current).
 
-### Append one row (daily process)
+### Append new rows (daily process)
 
-After each session close, append **one line** to each file (no header change):
+Prefer the automated updater (idempotent; safe to re-run):
+
+```bash
+python3 scripts/update_charts.py
+```
+
+That fetches FRED `DCOILBRENTEU` → `_data/brent.csv` and Yahoo `GC=F` → `_data/gold.csv`,
+keeps `date,close` with two-decimal closes, skips missing/`.` values, and omits Yahoo's
+in-progress same-day bar until the session is settled.
+
+Manual append (one line each, no header change) is still fine:
 
 ```text
 _data/brent.csv
